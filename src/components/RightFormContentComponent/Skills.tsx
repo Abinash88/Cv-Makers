@@ -16,6 +16,7 @@ const About: React.FC = () => {
   const Textbox = useRef<HTMLInputElement>(null);
   const [values, setValue] = useState<String>("");
   const [EducationBoxHover, setEducationBoxHover] = useState<Boolean>(false);
+  const [skillLevels, setSkillLevels] = useState<String>("");
   const [EducationForm, setEducationForm] = useState<Form[]>([
     {
       string: "",
@@ -30,7 +31,6 @@ const About: React.FC = () => {
     },
   ]);
 
-
   interface Form {
     string: string;
     isHoverd: Boolean;
@@ -43,9 +43,8 @@ const About: React.FC = () => {
   }
 
   const AddEducationFormFeild = () => {
-    setEducationForm([
-      ...EducationForm,
-      {
+    setEducationForm((previtem) => {
+      const newData = {
         string: "",
         isHoverd: false,
         Skill: [
@@ -55,21 +54,22 @@ const About: React.FC = () => {
           { string: "", isChoose: false },
           { string: "", isChoose: false },
         ],
-      },
-    ]);
+      };
+      return [...previtem, newData];
+    });
   };
 
   const HoverEducationBox = (index: number) => {
     setEducationForm((preitem) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
-        console.log(objs)
-        return i === index
-          ? { ...objs, isHoverd: !data[index].isHoverd }
-          : { ...data, isHoverd: false };
+        if (index === i) {
+          return { ...objs, isHoverd: !objs.isHoverd };
+        } else {
+          return { ...objs, isHoverd: false };
+        }
       });
-      console.log(newData);
-    //   return newData;
+      return newData;
     });
   };
 
@@ -83,19 +83,37 @@ const About: React.FC = () => {
     }
   };
 
-  const ChooseSkills = (index: number) => {
+  const ChooseSkills = (index: number, formIndex: number) => {
+    setSkillLevels(
+      index === 0
+        ? "Noob"
+        : index === 1
+        ? "Beginner"
+        : index === 2
+        ? "Skillfull"
+        : index === 3
+        ? "Experienced"
+        : index === 4
+        ? "Pro"
+        : ""
+    );
     setEducationForm((items: Form[]) => {
-      const data = [...items];
-      for (let i = 0;i < data.length; i++) {
-        data[i].Skill = data[i].Skill.map((item: SkillLevels, j: number) => {
-          return index >= j
-            ? { ...item, isChoose: true }
-            : { ...item, isChoose: false };
-        });
-      }
-
-      console.log(data);
-        return data;
+      const newans = items.map((newData, ind) => {
+        if (formIndex === ind) {
+          const newArray = (newData.Skill = newData.Skill.map(
+            (item: SkillLevels, j: number) => {
+              if (index >= j) {
+                return { ...item, isChoose: true };
+              } else {
+                return { ...item, isChoose: false };
+              }
+            }
+          ));
+          return { ...newData, Skill: newArray };
+        }
+        return newData
+      });
+      return newans;
     });
   };
 
@@ -105,30 +123,33 @@ const About: React.FC = () => {
       <p className="text-gray-500 h-full w-full text-[15px]">
         provide your Skills and its Level
       </p>
-      {EducationForm?.map((item, index) => {
+      {EducationForm?.map((item, formIndex) => {
         return (
           <form
-            key={index}
+            key={formIndex}
             className={` ${
-              item.isHoverd ? "h-[150px] " : "h-[60px] "
+              item.isHoverd ? "h-[200px] " : "h-[60px] "
             } border-b border-gray-300  overflow-hidden transition-all duration-400 my-6  w-full`}
           >
             <div className="flex justify-between items-center cursor-pointer hover:text-blue-500">
-              <h4
-                onClick={() => HoverEducationBox(index)}
-                className="text-[19px] hover:text-blue-500 text-gray-600"
-              >
-                Skills
-              </h4>
+              <div className="flex flex-col">
+                <h4
+                  onClick={() => HoverEducationBox(formIndex)}
+                  className="text-[19px] hover:text-blue-500 text-gray-600"
+                >
+                  Skills
+                </h4>
+                <p className="text-[14px]">{skillLevels}</p>
+              </div>
               <div className="flex justify-between items-center space-x-4">
                 <ChevronDownIcon
-                  onClick={() => HoverEducationBox(index)}
+                  onClick={() => HoverEducationBox(formIndex)}
                   className={`h-6 ${
                     EducationBoxHover ? "transform" : ""
                   }  text-gray-600`}
                 />
                 <TrashIcon
-                  onClick={() => DeleteEducationBox(index)}
+                  onClick={() => DeleteEducationBox(formIndex)}
                   className="h-5 text-red-600 hover:texta-red-700"
                 />
               </div>
@@ -144,25 +165,17 @@ const About: React.FC = () => {
                 />
               </div>
               <div className="flex-1 h-full space-y-2">
-                <label htmlFor="level">Level-</label>
+                <label htmlFor="level">
+                  Level-<span className="text-blue-600">{skillLevels} </span>
+                </label>
                 <div className="flex items-center cursor-pointer space-x-[1px] justify-between">
-                  {EducationForm[0].Skill.map((item, index) => {
+                  { EducationForm[0].Skill.map((item, skillIndex) => {
                     return (
                       <span
-                        onClick={() => ChooseSkills(index) as any}
-                        key={index}
+                        onClick={() => ChooseSkills(skillIndex, formIndex) as any}
+                        key={skillIndex}
                         className={`w-[30px] h-[30px] ${
-                          item.isChoose && index === 0
-                            ? "bg-red-700"
-                            : item.isChoose && index === 1
-                            ? "bg-yellow-600"
-                            : item.isChoose && index === 2
-                            ? "bg-green-600"
-                            : item.isChoose && index === 3
-                            ? "bg-blue-600"
-                            : item.isChoose && index === 4
-                            ? "bg-blue-800"
-                            : "bg-gray-200"
+                          item.isChoose  ? "bg-blue-700" : "bg-gray-200"
                         } transition-all duration-100 rounded-sm`}
                       ></span>
                     );

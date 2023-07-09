@@ -4,6 +4,7 @@ import Education from '../RightFormContentComponent/Education'
 import Experience from '../RightFormContentComponent/Experience'
 import Projects from '../RightFormContentComponent/Projects'
 import Skills from '../RightFormContentComponent/Skills'
+import Achivements from '../RightFormContentComponent/Achivements'
 
 const CvPageContentRight = () => {
   return (
@@ -13,6 +14,7 @@ const CvPageContentRight = () => {
       <Experience/>
       <Projects/>
       <Skills/>
+      <Achivements/>
     </div>
   )
 }
