@@ -5,6 +5,10 @@ import Experience from '../RightFormContentComponent/Experience'
 import Projects from '../RightFormContentComponent/Projects'
 import Skills from '../RightFormContentComponent/Skills'
 import Achivements from '../RightFormContentComponent/Achivements'
+import Traning from '../RightFormContentComponent/Traning'
+import Awards from '../RightFormContentComponent/Awards'
+import Language from '../RightFormContentComponent/Language'
+import Reference from '../RightFormContentComponent/Reference'
 
 const CvPageContentRight = () => {
   return (
@@ -15,6 +19,10 @@ const CvPageContentRight = () => {
       <Projects/>
       <Skills/>
       <Achivements/>
+      <Traning/>
+      <Awards/>
+      <Language/>
+      <Reference/>
     </div>
   )
 }
