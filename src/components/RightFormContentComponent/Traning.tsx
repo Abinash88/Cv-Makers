@@ -8,30 +8,36 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, SetStateAction, Dispatch } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
-const About: React.FC = () => {
+interface myComponentProps {
+  Training: TrainForm[];
+  setTraining: Dispatch<SetStateAction<AwardForm>[]>;
+}
+
+const About: React.FC<myComponentProps> = ({ setTraining, Training }) => {
   const Textbox = useRef<HTMLInputElement>(null);
   const [values, setValue] = useState<String>("");
   const [EducationBoxHover, setEducationBoxHover] = useState<Boolean>(false);
-  const [EducationForm, setEducationForm] = useState<Form[]>([
-    { string: "", isHoverd: false },
-  ]);
 
-  interface Form {
-    string: string;
-    isHoverd: Boolean;
-  }
-
-  const AddEducationFormFeild = () => {
-    setEducationForm([...EducationForm, { string: "", isHoverd: false }]);
+  const AddTrainingFeild = () => {
+    setTraining([
+      ...Training,
+      {
+        isHoverd: false,
+        certificatetitle: "",
+        organization: "",
+        completedate: "",
+        summery: "",
+      },
+    ]);
   };
 
   const HoverEducationBox = (index: number) => {
-    setEducationForm((preitem) => {
+    setTraining((preitem) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
         return i === index
@@ -43,22 +49,22 @@ const About: React.FC = () => {
   };
 
   const DeleteEducationBox = (index: number) => {
-    if ((EducationForm.length as any) > 1) {
-      const data = [...EducationForm];
+    if ((Training.length as any) > 1) {
+      const data = [...Training];
       data.splice(index, 1);
-      setEducationForm(data);
+      setTraining(data);
     } else {
       // remove the data from the education form
     }
   };
 
   return (
-    <div className="w-full h-auto my-5">
+    <div id="Traning" className="w-full h-auto my-5 slider">
       <h2 className="text-green-600 font-semibold w-full h-full ">Traning</h2>
       <p className="text-gray-500 h-full w-full text-[15px]">
         provide your Detail information about Traning
       </p>
-      {EducationForm?.map((item, index) => {
+      {Training?.map((item, index) => {
         return (
           <form
             key={index}
@@ -89,21 +95,51 @@ const About: React.FC = () => {
             <div className="mt-7 flex w-full">
               <div className=" space-y-2 w-full">
                 <label htmlFor="school">Training/Certification Title</label>
-                <input type="text" name="Training/Certification" className="form-control bg-white" />
+                <input
+                  type="text"
+                  name="Training/Certification"
+                  className="form-control bg-white"
+                  value={Training[index].certificatetitle}
+                  onChange={(e) => {
+                    const updateitem = [...Training];
+                    updateitem[index].certificatetitle = e.target.value;
+                    setTraining(updateitem);
+                  }}
+                />
               </div>
             </div>
 
             <div className="mt-3 flex space-x-3">
               <div className="space-y-2 w-full">
                 <label htmlFor="Degree">Institution/Organization</label>
-                <input type="text" name="Institution/Organization" className="form-control w-full bg-white" />
+                <input
+                  type="text"
+                  name="Institution/Organization"
+                  className="form-control w-full bg-white"
+                  value={Training[index].organization}
+                  onChange={(e) => {
+                    const updateitem = [...Training];
+                    updateitem[index].organization = e.target.value;
+                    setTraining(updateitem);
+                  }}
+                />
               </div>
             </div>
 
             <div className="mt-3 flex space-x-3">
               <div className="space-y-2 w-full">
                 <label htmlFor="StartDate w-full">Completion Date</label>
-                <input type="text" name='Completion Date' className="form-control bg-white" />
+                <input
+                  type="text"
+                  name="Completion Date"
+                  className="form-control bg-white"
+                  value={Training[index].completedate}
+                  onChange={(e) => {
+                    const updateitem = [...Training];
+                    updateitem[index].completedate = e.target.value;
+                    setTraining(updateitem);
+                  }}
+                />
               </div>
             </div>
 
@@ -115,8 +151,12 @@ const About: React.FC = () => {
                     placeholder="Tell little about yourself"
                     className=""
                     theme="snow"
-                    value={values as any}
-                    onChange={setValue}
+                    value={Training[index].summery}
+                    onChange={(e) => {
+                      const updateitem = [...Training];
+                      updateitem[index].summery = e;
+                      setTraining(updateitem);
+                    }}
                   />
                 </div>
               </div>
@@ -129,7 +169,7 @@ const About: React.FC = () => {
         <button
           type="button"
           className="text-blue-500 flex space-x-2"
-          onClick={AddEducationFormFeild}
+          onClick={AddTrainingFeild}
         >
           <PlusIcon className="h-6" /> Add Form
         </button>

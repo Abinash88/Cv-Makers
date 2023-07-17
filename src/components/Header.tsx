@@ -7,6 +7,9 @@ const Header = () => {
         <div className="headerlogo">
             <Link className='logo' href={'/'}> <span>Cv</span>-Maker</Link>
         </div>
+        <div className=''>
+          <h5 className='text-red-600  border-2 rounded-full p-2 border-red-500'> On Going Porject </h5>
+        </div>
         <div className="">
             <Link className='loginlinks' href={'/Login'}>Login</Link>
         </div>

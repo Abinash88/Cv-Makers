@@ -118,7 +118,7 @@ const About: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-auto my-5">
+    <div id='Skills' className="w-full h-auto my-5 slider">
       <h2 className="text-green-600 font-semibold w-full h-full ">Skills</h2>
       <p className="text-gray-500 h-full w-full text-[15px]">
         provide your Skills and its Level

@@ -8,58 +8,72 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
-const About: React.FC = () => {
+interface myComponentProps {
+  ExperienceForm: ExpForm[];
+  setExperienceForm: Dispatch<SetStateAction<Form>[]>;
+}
+
+const About: React.FC<myComponentProps> = ({
+  ExperienceForm,
+  setExperienceForm,
+}) => {
   const Textbox = useRef<HTMLInputElement>(null);
   const [values, setValue] = useState<String>("");
   const [EducationBoxHover, setEducationBoxHover] = useState<Boolean>(false);
-  const [EducationForm, setEducationForm] = useState<Form[]>([
-    { string: "", isHoverd: false },
-  ]);
 
-  interface Form {
-    string: string;
-    isHoverd: Boolean;
-  }
 
-  const AddEducationFormFeild = () => {
-    setEducationForm([...EducationForm, { string: "", isHoverd: false }]);
-    console.log(EducationForm);
+  const AddExperienceFormFeild = () => {
+    setExperienceForm([
+      ...ExperienceForm,
+      {
+        isHoverd: false,
+        jobtitle: "",
+        organization: "",
+        location: "",
+        startdate: "",
+        enddate: "",
+        summery: "",
+      },
+    ]);
+    console.log(ExperienceForm);
   };
 
   const HoverEducationBox = (index: number) => {
-    setEducationForm((preitem) => {
+    setExperienceForm((preitem) => {
       const data = [...preitem];
-      const newData = data.map((objs:any, i:number) =>{
-        return i === index ? {...objs, isHoverd: !data[index].isHoverd} :{...objs, isHoverd:false}
-       } )
-       return newData;
+      const newData = data.map((objs: any, i: number) => {
+        return i === index
+          ? { ...objs, isHoverd: !data[index].isHoverd }
+          : { ...objs, isHoverd: false };
+      });
+      return newData;
     });
   };
 
   const DeleteEducationBox = (index: number) => {
-    if ((EducationForm.length as any) > 1) {
-      const data = [...EducationForm];
+    if ((ExperienceForm.length as any) > 1) {
+      const data = [...ExperienceForm];
       data.splice(index, 1);
-      setEducationForm(data);
+      setExperienceForm(data);
     } else {
       // remove the data from the education form
     }
   };
 
   return (
-    <div className="w-full h-auto my-5">
+    <div id="Experience" className="w-full h-auto my-5 slider">
       <h2 className="text-green-600 font-semibold w-full h-full ">
         Experience
       </h2>
       <p className="text-gray-500 h-full w-full text-[15px]">
         provide your Detail information about you Work Experience
       </p>
-      {EducationForm?.map((item, index) => {
+      {ExperienceForm?.map((item, index) => {
         return (
           <form
             key={index}
@@ -90,29 +104,75 @@ const About: React.FC = () => {
             <div className="mt-7 flex w-full">
               <div className=" space-y-2 w-full">
                 <label htmlFor="school">Job title</label>
-                <input type="text" className="form-control bg-white" />
+                <input
+                  type="text"
+                  name="jobtitle"
+                  className="form-control bg-white"
+                  value={ExperienceForm[index].jobtitle}
+                  onChange={(e) => {
+                    const updateitem = [...ExperienceForm];
+                    updateitem[index].jobtitle = e.target.value;
+                    setExperienceForm(updateitem);
+                  }}
+                />
               </div>
             </div>
 
             <div className="mt-3 flex space-x-3">
               <div className="space-y-2">
                 <label htmlFor="Degree">Employer/Organization</label>
-                <input type="text" className="form-control bg-white" />
+                <input
+                  type="text"
+                  value={ExperienceForm[index].organization}
+                  onChange={(e) => {
+                    const updateitem = [...ExperienceForm];
+                    updateitem[index].organization = e.target.value;
+                    setExperienceForm(updateitem);
+                  }}
+                  className="form-control bg-white"
+                />
               </div>
               <div className="space-y-2">
                 <label htmlFor="City">Location</label>
-                <input type="text" className="form-control bg-white" />
+                <input
+                  type="text"
+                  value={ExperienceForm[index].location}
+                  onChange={(e) => {
+                    const updateitem = [...ExperienceForm];
+                    updateitem[index].location = e.target.value;
+                    setExperienceForm(updateitem);
+                  }}
+                  className="form-control bg-white"
+                />
               </div>
             </div>
 
             <div className="mt-3 flex space-x-3">
               <div className="space-y-2">
                 <label htmlFor="StartDate">Start Date</label>
-                <input type="text" className="form-control bg-white" />
+                <input
+                  type="text"
+                  value={ExperienceForm[index].startdate}
+                  onChange={(e) => {
+                    const updateitem = [...ExperienceForm];
+                    updateitem[index].startdate = e.target.value;
+                    setExperienceForm(updateitem);
+                  }}
+                  className="form-control bg-white"
+                />
               </div>
               <div className="space-y-2">
                 <label htmlFor="GraduateDate">End Date</label>
-                <input type="text" className="form-control bg-white" />
+                <input
+                  type="text"
+                  value={ExperienceForm[index].enddate}
+                  onChange={(e) => {
+                    const updateitem = [...ExperienceForm];
+                    updateitem[index].enddate = e.target.value;
+                    setExperienceForm(updateitem);
+                  }}
+                  className="form-control bg-white"
+                />
               </div>
             </div>
 
@@ -124,8 +184,12 @@ const About: React.FC = () => {
                     placeholder="Mention briefly what sorts of noteworthy tasks you performed at this workplace. Feel free to add your major highlights/achievements as well."
                     className=""
                     theme="snow"
-                    value={values as any}
-                    onChange={setValue}
+                    value={ExperienceForm[index].summery}
+                    onChange={(e) => {
+                      const updateitem = [...ExperienceForm];
+                      updateitem[index].summery = e;
+                      setExperienceForm(updateitem);
+                    }}
                   />
                 </div>
               </div>
@@ -138,7 +202,7 @@ const About: React.FC = () => {
         <button
           type="button"
           className="text-blue-500 flex space-x-2"
-          onClick={AddEducationFormFeild}
+          onClick={AddExperienceFormFeild}
         >
           <PlusIcon className="h-6" /> Add Form
         </button>
