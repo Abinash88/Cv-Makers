@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Abinash from "../../../public/abinash.jpg";
 import html2pdf from "html2pdf.js";
 import LeftLayoutBlackbox from "@/components/mainCvDownloadLayoutBox/LeftLayoutBlackbox";
@@ -12,7 +12,7 @@ interface MyEducationProps {
   ProjectForm: PorjForm[];
   Achivement: AchivForm[];
   Award: AwardForm[];
-  Training:TrainForm[];
+  Training: TrainForm[];
 }
 
 const CvPageDownload: React.FC<MyEducationProps> = ({
@@ -23,6 +23,9 @@ const CvPageDownload: React.FC<MyEducationProps> = ({
   Award,
   Training,
 }) => {
+  const [CvHeightAuto, setCvHeightAuto] = useState<boolean>(false);
+  const [downloadHeight, setDownloadHeight] = useState<boolean>(false);
+  const outerdiv = useRef(null);
   const page = useRef<HTMLDivElement>();
   const ChangeToPdf = () => {
     const mypage = page.current;
@@ -30,6 +33,32 @@ const CvPageDownload: React.FC<MyEducationProps> = ({
 
     html2pdf().from(mypage).save("my_pdf.pdf");
   };
+  const downloadpage = document.getElementById("downloadpage");
+
+  useEffect(() => {
+    const CheckOverFlow = () => {
+      if (downloadpage?.scrollHeight ?? 0 > downloadpage?.clientHeight ?? 0) {
+        setCvHeightAuto(true);
+      } else {
+        setCvHeightAuto(false);
+      }
+    };
+    CheckOverFlow();
+  }, []);
+
+  useEffect(() => {
+    const leftblackbox = document.getElementById("leftblackbox");
+    const checkHeight = () => {
+      if(leftblackbox && downloadpage) {
+        if (downloadpage?.scrollHeight ?? 0 > downloadpage?.clientHeight ?? 0) {
+          setDownloadHeight(true);
+        } else {
+          setDownloadHeight(false);
+        }
+      }
+    };
+    checkHeight();
+  }, []);
 
   return (
     <div className="flex-1 h-full p-2">
@@ -53,10 +82,13 @@ const CvPageDownload: React.FC<MyEducationProps> = ({
 
       <div className="overflow-auto mainCvLayout h-full">
         <div
+          id="downloadpage"
           ref={page as any}
-          className="h-[150vh] flex justify-between overflow-auto w-full p- bg-white rounded-md"
+          className={`${
+            CvHeightAuto ? "h-auto" : "h-[150vh]"
+          } relative  flex justify-between overflow-auto w-full pb-[70px] bg-white rounded-md`}
         >
-          <LeftLayoutBlackbox Abinash={Abinash} EducationForm={EducationForm} />
+          <LeftLayoutBlackbox Abinash={Abinash} EducationForm={EducationForm} downloadHeight={downloadHeight}/>
 
           <RightLayoutWhitebox
             {...{ ExperienceForm, ProjectForm, Achivement, Award, Training }}

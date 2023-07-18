@@ -33,20 +33,31 @@ a:hover {
 
 .CvCreatorLink .cvlinks {
   background-color: var(--blackGreen);
-  padding: 15px 40px;
+  padding: 25px 50px;
   color: white;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border-radius: 50px;
   transition: .1s;
 }
 
 .CvCreatorLink .cvlinks:hover {
   background-color: var(--hoverGreen);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.heading{
+  color: #172915;
+}
 
 .headerlogo .logo {
-  font-size: 25px;
   font-weight: 600;
-  color: #37443a;
+  color: #0d1b10;
+  /* border: 2px solid var(--mainGreen); */
+  padding: 5px;
+  border-radius: 50px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .headerlogo .logo span {
@@ -69,20 +80,23 @@ a:hover {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background-color: #e9e9e9;
-  color: #153b15;
+  background-color: #e0f1ff;
+  color: #0e76ff;
 }
 
 .leftbox .btn:hover {
-  background-color: #ddf7da;
+  background-color: #f0f0f0;
 }
 
 
 .leftbox .btn .icons {
-  color: #153b15;
+  color: #0e76ff;
 
 }
 
+.leftbox .btn:hover .icons{
+  color: #0e76ff;
+}
 
 .leftbox::-webkit-scrollbar {
   visibility: hidden;
@@ -169,3 +183,14 @@ input {
   color: rgb(26, 192, 10);
   background-color: rgb(200, 255, 200);
 }
+
+
+
+/* ongoing letter design  */
+
+.ongointtag{
+  background:linear-gradient(to right, #f81313, #f5980d, #006eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color:transparent;
+}
+

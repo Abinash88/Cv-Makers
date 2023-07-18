@@ -10,12 +10,18 @@ import ContactItemComponent from "../smallComponentsPart/ContactItemComponent";
 interface MyEducationProps {
   EducationForm: Form[];
   Abinash: any;
+  downloadHeight: boolean;
 }
 
-const LeftLayoutBlackbox:React.FC<MyEducationProps> = ({ Abinash, EducationForm }) => {
+const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
+  Abinash,
+  EducationForm,
+  downloadHeight,
+}) => {
   const { phone, email, city, address } = useSelector(
     (state: any) => state.About
   );
+  const { image } = useSelector((state: any) => state.About);
   const ChangToHtmlText = (newHtml: string) => {
     return [
       <div
@@ -26,10 +32,21 @@ const LeftLayoutBlackbox:React.FC<MyEducationProps> = ({ Abinash, EducationForm 
   };
 
   return (
-    <div className="leftsideLayout h-full w-[270px] overflow-clip">
-      <div className="imagebox w-full h-auto ">
-        <img src={Abinash.src} className="text-white" alt="User Photo" />
-      </div>
+    <div
+      id="leftblackbox"
+      className={` leftsideLayout h-full ${
+        downloadHeight ? "100%" : "w-[270px]"
+      }  overflow-clip`}
+    >
+     {image ? <div className="imagebox relative w-full h-[200px]  flex items-center justify-center">
+        <div className="w-[180px] h-[180px] flex items-center justify-center rounded-full overflow-hidden">
+          <img
+            src={image && image}
+            className="text-white h-auto w-[180px] rounded-full"
+            alt="User Photo"
+          />
+        </div>
+      </div> : null}
       <div className="h-auto">
         {phone || email || city || address ? (
           <div className="education  ml-[20px] pl-5 mt-[50px] flex flex-col items-start">
@@ -65,14 +82,13 @@ const LeftLayoutBlackbox:React.FC<MyEducationProps> = ({ Abinash, EducationForm 
             ) : null}
           </div>
         ) : null}
-        {
+        { EducationForm[0]?.degree !== '' || EducationForm[0]?.school !== '' || EducationForm[0]?.city !== '' || EducationForm[0]?.startdate !== '' || EducationForm[0]?.summery.length > 12  ?
           <div className="education  ml-[20px] pl-5  mt-[50px] flex flex-col items-start">
             <h3 className="text-white  font-bold border-b w-full  border-yellow-500  text-[20px] mb-3 pb-2">
               Education
             </h3>
             <div className="">
               {EducationForm?.map((item: any, index: number) => {
-                console.log(item, "itemssssss");
                 return (
                   <div key={index} className="text-white mb-4">
                     <h6 className="text-[16px]">{item?.degree}</h6>
@@ -91,7 +107,7 @@ const LeftLayoutBlackbox:React.FC<MyEducationProps> = ({ Abinash, EducationForm 
                 );
               })}
             </div>
-          </div>
+          </div> : null
         }
       </div>
     </div>

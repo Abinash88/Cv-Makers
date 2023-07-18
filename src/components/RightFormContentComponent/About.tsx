@@ -11,7 +11,7 @@ import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import { useDispatch, useSelector } from "react-redux";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 import {
   Address,
   City,
@@ -21,6 +21,7 @@ import {
   LastName,
   Phone,
   Summery,
+  Image,
 } from "@/ReduxSlices/AboutSlice";
 
 const About: React.FC = () => {
@@ -34,6 +35,7 @@ const About: React.FC = () => {
     city,
     address,
     summery,
+    image,
   } = useSelector((state: any) => state.About);
   const dispatch = useDispatch();
   interface Form {
@@ -65,6 +67,19 @@ const About: React.FC = () => {
     data.splice(index, 1);
     setFormList(data);
   };
+
+  const GetImage = (e: any) => {
+    const data = e.target.files[0];
+    if (data) {
+      const images = URL.createObjectURL(data);
+      dispatch(Image(images));
+    }
+  };
+
+  const DeleteImage = () => {
+    const imgs = "";
+    dispatch(Image(imgs));
+  };
   return (
     <div id="About" className="w-full h-auto slider ">
       <h2 className="text-green-600 font-semibold ">About</h2>
@@ -74,16 +89,24 @@ const About: React.FC = () => {
       <form action="">
         <div className="flex space-x-3">
           <div className="w-[70px] h-[70px] border-gray-300 border rounded-full ">
-            <img src="" className="w-full h-full rounded-full " alt="" />
+            <img src={image} className="w-full h-full rounded-full " alt="" />
           </div>
-          <input ref={ClickingTheImageFile} type="file" className="hidden" />
-          <h5
-            onClick={ClickTheFile}
-            className="flex items-center text-[18px] space-x-2 cursor-pointer"
-          >
-            <ArrowDownCircleIcon className="h-7 text-green-600" />{" "}
-            <span>Upload Image</span>
-          </h5>
+          <input
+            ref={ClickingTheImageFile}
+            onChange={GetImage}
+            type="file"
+            className="hidden"
+          />
+          <div className="">
+            <h5
+              onClick={ClickTheFile}
+              className="flex items-center text-[18px] space-x-2 cursor-pointer"
+            >
+              <ArrowDownCircleIcon className="h-7 text-green-600" />{" "}
+              <span>Upload Image</span>
+            </h5>
+            <span onClick={DeleteImage} className="font-semibold text-red-600 text-[14px] space-x-2 cursor-pointer flex items-center ml-9"><TrashIcon className="h-4 text-red-600"/> <span>Delete Image</span></span>
+          </div>
         </div>
 
         <div className="mt-7 flex space-x-3">
@@ -199,12 +222,12 @@ const About: React.FC = () => {
             </div>
           ))}
 
-         <Button
+          <Button
             type="button"
             className="text-blue-500 flex space-x-2"
             onClick={addForm}
           >
-            <PlusIcon className="h-6" /> 
+            <PlusIcon className="h-6" />
           </Button>
         </div>
 

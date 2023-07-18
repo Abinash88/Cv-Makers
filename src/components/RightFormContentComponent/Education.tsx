@@ -60,10 +60,17 @@ const About: React.FC<myComponentProps> = ({EducationForm, setEducationForm}) =>
       setEducationForm(data);
     } else {
       // remove the data from the education form
+      setEducationForm((item) =>{ 
+        const data = [...item];
+        return data.map((items) => {
+          return { city:'', degree:'', graduatedate:'', isHoverd:false, school:'', startdate:'', summery:'<p><br></p>'}
+       })
+
+      })
     }
   };
 
-
+// 
 
   return (
     <div id="Education" className="w-full h-auto my-5 slider">
@@ -84,7 +91,9 @@ const About: React.FC<myComponentProps> = ({EducationForm, setEducationForm}) =>
                 onClick={() => HoverEducationBox(index)}
                 className="text-[19px] hover:text-blue-500 text-gray-600"
               >
-                School/Instution
+               { EducationForm[index].school !== '' ?  EducationForm[index].school
+               : 'School/Instution'
+               }
               </h4>
               <div className="flex justify-between items-center space-x-4">
                 <ChevronDownIcon

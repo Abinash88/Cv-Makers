@@ -42,7 +42,7 @@ const About: React.FC<myComponentProps> = ({ setTraining, Training }) => {
       const newData = data.map((objs: any, i: number) => {
         return i === index
           ? { ...objs, isHoverd: !data[index].isHoverd }
-          : { ...data, isHoverd: false };
+          : { ...objs, isHoverd: false };
       });
       return newData;
     });
@@ -55,6 +55,16 @@ const About: React.FC<myComponentProps> = ({ setTraining, Training }) => {
       setTraining(data);
     } else {
       // remove the data from the education form
+      setTraining((item) =>{ 
+        const data = [...item];
+        return data.map((items) => {
+          return { isHoverd: false,
+            certificatetitle: "",
+            organization: "",
+            completedate: "", summery:'<p><br></p>'}
+       })
+
+      })
     }
   };
 

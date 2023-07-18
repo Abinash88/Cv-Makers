@@ -8,7 +8,7 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React, { useRef, useState, SetStateAction, Dispatch } from "react";
+import React, { useRef, useState, SetStateAction, Dispatch, useEffect } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
@@ -30,13 +30,14 @@ const About: React.FC<myComponentProps> = ({ Achivement, setAchivement }) => {
     ]);
   };
 
+
   const HoverEducationBox = (index: number) => {
-    setAchivement((preitem: any) => {
+    setAchivement((preitem: any[]) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
         return i === index
           ? { ...objs, isHoverd: !data[index].isHoverd }
-          : { ...data, isHoverd: false };
+          : { ...objs, isHoverd: false };
       });
       return newData;
     });
@@ -49,6 +50,14 @@ const About: React.FC<myComponentProps> = ({ Achivement, setAchivement }) => {
       setAchivement(data);
     } else {
       // remove the data from the education form
+      setAchivement((item:any[]) =>{ 
+        const data = [...item];
+        return data.map((items) => {
+          return { isHoverd: false,
+            AchivTitle: "", summery:'<p><br></p>'}
+       })
+
+      })
     }
   };
 

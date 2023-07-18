@@ -40,7 +40,6 @@ const About: React.FC<myComponentProps> = ({
         summery: "",
       },
     ]);
-    console.log(ExperienceForm);
   };
 
   const HoverEducationBox = (index: number) => {
@@ -62,6 +61,18 @@ const About: React.FC<myComponentProps> = ({
       setExperienceForm(data);
     } else {
       // remove the data from the education form
+      setExperienceForm((item) =>{ 
+        const data = [...item];
+        return data.map((items) => {
+          return {  isHoverd: false,
+            jobtitle: "",
+            organization: "",
+            location: "",
+            startdate: "",
+            enddate: "", summery:'<p><br></p>'}
+       })
+
+      })
     }
   };
 

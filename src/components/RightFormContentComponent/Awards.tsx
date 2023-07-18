@@ -41,24 +41,37 @@ const About: React.FC<myComponentProps> = ({ setAward, Award }) => {
       const newData = data.map((objs: any, i: number) => {
         return i === index
           ? { ...objs, isHoverd: !data[index].isHoverd }
-          : { ...data, isHoverd: false };
+          : { ...objs, isHoverd: false };
       });
       return newData;
     });
   };
 
   const DeleteEducationBox = (index: number) => {
-    if ((Award.length as any) > 1) {
+    if (Award.length > 1) {
       const data = [...Award];
       data.splice(index, 1);
       setAward(data);
     } else {
       // remove the data from the education form
+      setAward((item:any[]) => {
+        const data = [...item];
+        return data.map((items) => {
+          return {
+            isHoverd: false,
+            awardtitle: "",
+            organization: "",
+            location: "",
+            receveddate: "",
+            summery: "<p><br></p>",
+          };
+        });
+      });
     }
   };
 
   return (
-    <div id="Award" className="w-full h-auto my-5 slider">
+    <div id="Awards" className="w-full h-auto my-5 slider">
       <h2 className="text-green-600 font-semibold w-full h-full ">Award</h2>
       <p className="text-gray-500 h-full w-full text-[15px]">
         provide your Detail information about your Award

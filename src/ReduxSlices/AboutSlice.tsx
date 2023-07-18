@@ -10,6 +10,7 @@ const initialState = {
   phone: "",
   summery: null,
   status: null,
+  image:'',
 };
 
 export const AboutSlice = createSlice({
@@ -40,6 +41,9 @@ export const AboutSlice = createSlice({
     Summery(state, action) {
       state.summery = action.payload;
     },
+    Image(state, action) {
+      state.image = action.payload
+    }
   },
 });
 
@@ -52,5 +56,6 @@ export const {
   Email,
   Phone,
   Summery,
+  Image,
 } = AboutSlice.actions;
 export default AboutSlice.reducer;

@@ -43,7 +43,7 @@ const References: React.FC<myComponentProps> = ({
       const newData = data.map((objs: any, i: number) => {
         return i === index
           ? { ...objs, isHoverd: !data[index].isHoverd }
-          : { ...data, isHoverd: false };
+          : { ...objs, isHoverd: false };
       });
       return newData;
     });
@@ -56,11 +56,24 @@ const References: React.FC<myComponentProps> = ({
       setReferences(data);
     } else {
       // remove the data from the education form
+      setReferences((item) =>{ 
+        const data = [...item];
+        return data.map((items) => {
+          return { isHoverd: false,
+            firstname: "",
+            lastname: "",
+            company: "",
+            designation: "",
+            phone: 0,
+            email: "",}
+       })
+
+      })
     }
   };
 
   return (
-    <div id="References" className="w-full h-auto my-5 References slider">
+    <div id="Reference" className="w-full h-auto my-5 References slider">
       <h2 className="text-green-600 font-semibold w-full h-full ">
         References
       </h2>

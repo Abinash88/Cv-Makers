@@ -36,7 +36,7 @@ const About: React.FC<myComponentProps> = ({ ProjectForm, setProjectForm }) => {
       const newData = data.map((objs: any, i: number) => {
         return i === index
           ? { ...objs, isHoverd: !data[index].isHoverd }
-          : { ...data, isHoverd: false };
+          : { ...objs, isHoverd: false };
       });
       return newData;
     });
@@ -49,6 +49,15 @@ const About: React.FC<myComponentProps> = ({ ProjectForm, setProjectForm }) => {
       setProjectForm(data);
     } else {
       // remove the data from the education form
+      setProjectForm((item) =>{ 
+        const data = [...item];
+        return data.map((items) => {
+          return { isHoverd: false,
+            Projecttitle: "",
+            projectlink: "", summery:'<p><br></p>'}
+       })
+
+      })
     }
   };
 
