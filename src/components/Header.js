@@ -1,4 +1,4 @@
-import { FetchGetUser } from '@/ReduxSlices/GetUserSlice';
+// import { FetchGetUser } from '@/ReduxSlices/GetUserSlice';
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
@@ -6,10 +6,7 @@ import { useDispatch } from 'react-redux'
 const Header = () => {
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(FetchGetUser())
-  },[]) 
+ 
 
   return (
     <div className='w-screen flex justify-between px-5 items-center h-[70px]'>
