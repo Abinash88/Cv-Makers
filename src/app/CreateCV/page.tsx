@@ -131,7 +131,7 @@ const CreateCv: React.FC = () => {
     lastname: string;
     company: string;
     designation: string;
-    phone: number;
+    phone: any;
     email: string;
   }
   const [References, setReferences] = useState<ReferForm[]>([
@@ -141,12 +141,79 @@ const CreateCv: React.FC = () => {
       lastname: "",
       company: "",
       designation: "",
-      phone: 0,
+      phone: undefined,
       email: "",
     },
   ]);
   // References form Data end here
 
+  interface SocialIcon {
+    linkname:string,
+    links:string,
+  }
+
+  // const social media links start here 
+  const [SocialMedia, setSocialMedia] = useState<SocialIcon[]>([
+  ]);
+  // const social media links end here 
+
+  interface language{
+    isHoverd:boolean;
+    Langtype:string;
+    LangLevel:string;
+    Skill:Skill[];
+  }
+
+  interface Skill{
+    isChoose:boolean;
+    level:string;
+    getlevel:boolean;
+  }
+ 
+  // language skill choose 
+  const [LanguageForm, setLanguageForm] = useState<language[]>([
+    {
+      Langtype: "",
+      LangLevel: "",
+      isHoverd: false,
+      Skill: [
+        {  isChoose: false, getlevel:false, level: "noob" },
+        {  isChoose: false, getlevel:false, level: "Begginer" },
+        {  isChoose: false, getlevel:false, level: "Skillful" },
+        {  isChoose: false, getlevel:false, level: "Experienced" },
+        {  isChoose: false, getlevel:false, level: "Expert" },
+      ],
+    },
+  ]);
+
+  const [InputSkillType ,setInputSkillType] = useState<string>('')
+
+  // Skill section data store start 
+  interface SkillForm {
+    isHoverd: Boolean;
+    Skilltype:string;
+    Skill: Array<any>;
+    skillLevel:string;
+  }
+
+  const [SkillFormData, setSkillFormData] = useState<SkillForm[]>([
+    {
+      isHoverd: false,
+      Skilltype:'',
+      skillLevel:'',
+      Skill: [
+        { isChoose: false, getlevel:false, level: "Noob" },
+        { isChoose: false, getlevel:false, level: "Begginer" },
+        { isChoose: false, getlevel:false, level: "Skillful" },
+        { isChoose: false, getlevel:false, level: "Experienced" },
+        { isChoose: false, getlevel:false, level: "Expert" },
+      ],
+    },
+  ]);
+  // Skill section data store end
+
+  const [GetCvStyle, setGetCvStle] = useState<string>('')
+  console.log(GetCvStyle)
   return (
     <div
       style={{ height: "calc(100vh - 70px)" }}
@@ -162,7 +229,13 @@ const CreateCv: React.FC = () => {
             Achivement,
             Award,
             Training,
-            References
+            References,
+            SocialMedia,
+            InputSkillType,
+            SkillFormData,
+            LanguageForm,
+            setGetCvStle,
+            GetCvStyle,
           }}
         />
         <CvPageContentRight
@@ -181,6 +254,12 @@ const CreateCv: React.FC = () => {
             setTraining,
             References,
             setReferences,
+            SocialMedia,
+            setSocialMedia,
+            LanguageForm,
+            setLanguageForm,
+            SkillFormData,
+            setSkillFormData,
           }}
         />
       </div>

@@ -7,56 +7,40 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, SetStateAction, Dispatch } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
-// interface myComponentProps {
- 
-// }
+interface myComponentProps {
+  LanguageForm: language[];
+  setLanguageForm: Dispatch<SetStateAction<language>[]>;
+}
 
-const About: React.FC = ({}) => {
+const About: React.FC<myComponentProps> = ({
+  LanguageForm,
+  setLanguageForm,
+}) => {
   const Textbox = useRef<HTMLInputElement>(null);
-  const [values, setValue] = useState<String>("");
   const [EducationBoxHover, setEducationBoxHover] = useState<Boolean>(false);
-  const [skillLevels, setSkillLevels] = useState<String>("");
-  const [EducationForm, setEducationForm] = useState<Form[]>([
-    {
-      string: "",
-      isHoverd: false,
-      Skill: [
-        { string: "", isChoose: false },
-        { string: "", isChoose: false },
-        { string: "", isChoose: false },
-        { string: "", isChoose: false },
-        { string: "", isChoose: false },
-      ],
-    },
-  ]);
-
-  interface Form {
-    string: string;
-    isHoverd: Boolean;
-    Skill: Array<any>;
-  }
 
   interface SkillLevels {
     string: string;
     isChoose: Boolean;
   }
 
-  const AddEducationFormFeild = () => {
-    setEducationForm((previtem) => {
+  const AddLanguageFormFeild = () => {
+    setLanguageForm((previtem) => {
       const newData = {
-        string: "",
+        Langtype: "",
+        LangLevel: "",
         isHoverd: false,
         Skill: [
-          { string: "", isChoose: false },
-          { string: "", isChoose: false },
-          { string: "", isChoose: false },
-          { string: "", isChoose: false },
-          { string: "", isChoose: false },
+          { isChoose: false, getlevel:false, level: "noob" },
+          { isChoose: false, getlevel:false, level: "Begginer" },
+          { isChoose: false, getlevel:false, level: "Skillful" },
+          { isChoose: false, getlevel:false, level: "Experienced" },
+          { isChoose: false, getlevel:false, level: "Expert" },
         ],
       };
       return [...previtem, newData];
@@ -64,13 +48,13 @@ const About: React.FC = ({}) => {
   };
 
   const HoverEducationBox = (index: number) => {
-    setEducationForm((preitem) => {
+    setLanguageForm((preitem:any) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
         if (index === i) {
-          return { ...objs, isHoverd: !objs.isHoverd };
+          return { ...objs,  isHoverd: !objs.isHoverd };
         } else {
-          return { ...objs, isHoverd: false };
+          return { ...objs,  isHoverd: false };
         }
       });
       return newData;
@@ -78,42 +62,42 @@ const About: React.FC = ({}) => {
   };
 
   const DeleteEducationBox = (index: number) => {
-    if ((EducationForm.length as any) > 1) {
-      const data = [...EducationForm];
+    if ((LanguageForm.length as any) > 1) {
+      const data = [...LanguageForm];
       data.splice(index, 1);
-      setEducationForm(data);
+      setLanguageForm(data);
     } else {
       // remove the data from the education form
+      setLanguageForm((item) => {
+        const newans = item[0]?.Skill?.map((newData: object[]) => {
+          return { ...newData, isChoose: false };
+        });
+        return [{ ...item, Langtype: "", LangLevel: "", Skill: newans }];
+      });
     }
   };
 
   const ChooseSkills = (index: number, formIndex: number) => {
-    setSkillLevels(
-      index === 0
-        ? "Noob"
-        : index === 1
-        ? "Beginner"
-        : index === 2
-        ? "Skillfull"
-        : index === 3
-        ? "Experienced"
-        : index === 4
-        ? "Pro"
-        : ""
-    );
-    setEducationForm((items: Form[]) => {
+
+    const selectedLanguage = LanguageForm[formIndex]?.Skill[index].level;
+    setLanguageForm((item:any) => {
+      const data = [...item];
+      data[formIndex].LangLevel = selectedLanguage !== '' ?selectedLanguage: '';
+      return data;
+    })
+
+    setLanguageForm((items: Form[]) => {
       const newans = items.map((newData, ind) => {
-        console.log(formIndex, index);
         if (formIndex === ind) {
-          const newArray = (newData.Skill = newData.Skill.map(
+          const newArray = newData.Skill.map(
             (item: SkillLevels, j: number) => {
               if (index >= j) {
-                return { ...item, isChoose: true };
+                return { ...item, getlevel:index === j, isChoose: true};
               } else {
-                return { ...item, isChoose: false };
+                return { ...item, getlevel:false, isChoose: false };
               }
             }
-          ));
+          );
           return { ...newData, Skill: newArray };
         } else {
           return newData;
@@ -129,7 +113,7 @@ const About: React.FC = ({}) => {
       <p className="text-gray-500 h-full w-full text-[15px]">
         provide your Language skills its Level
       </p>
-      {EducationForm?.map((item, formIndex) => {
+      {LanguageForm?.map((item, formIndex) => {
         return (
           <form
             key={formIndex}
@@ -143,9 +127,11 @@ const About: React.FC = ({}) => {
                   onClick={() => HoverEducationBox(formIndex)}
                   className="text-[19px] hover:text-blue-500 text-gray-600"
                 >
-                  Language
+                  {LanguageForm[formIndex].Langtype !== ""
+                    ? LanguageForm[formIndex].Langtype
+                    : `Language`}
                 </h4>
-                <p className="text-[14px]">{skillLevels}</p>
+                <p className="text-[14px]">{ LanguageForm[formIndex]?.LangLevel}</p>
               </div>
               <div className="flex justify-between items-center space-x-4">
                 <ChevronDownIcon
@@ -167,15 +153,24 @@ const About: React.FC = ({}) => {
                   type="text"
                   placeholder="Communication"
                   className="form-control"
+                  value={LanguageForm[formIndex].Langtype}
+                  onChange={(e) => {
+                    const updateitem = [...LanguageForm];
+                    updateitem[formIndex].Langtype = e.target.value;
+                    setLanguageForm(updateitem);
+                  }}
                   required
                 />
               </div>
               <div className="flex-1 h-full space-y-2">
                 <label htmlFor="level">
-                  Level-<span className="text-blue-600">{skillLevels} </span>
+                  Level-
+                  <span className="text-blue-600">
+                    {LanguageForm[formIndex]?.LangLevel}{" "}
+                  </span>
                 </label>
                 <div className="flex items-center cursor-pointer space-x-[1px] justify-between">
-                  {EducationForm[0].Skill.map((item, skillIndex) => {
+                  {LanguageForm[formIndex].Skill.map((item:any, skillIndex:number) => {
                     return (
                       <span
                         onClick={() =>
@@ -199,15 +194,15 @@ const About: React.FC = ({}) => {
         <button
           type="button"
           className="text-blue-500 flex space-x-2"
-          onClick={AddEducationFormFeild}
+          onClick={AddLanguageFormFeild}
         >
           <PlusIcon className="h-6" /> Add Form
         </button>
       </div>
       <div className="mt-[50px] ">
-        <button type="button" className="btn btn-primary block mx-auto">
+        <a href="#Reference" type="button" className="btn btn-primary block mx-auto">
           Next Page
-        </button>
+        </a>
       </div>
     </div>
   );

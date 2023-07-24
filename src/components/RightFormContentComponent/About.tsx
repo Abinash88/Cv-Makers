@@ -6,7 +6,13 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  useRef,
+  useState,
+  SetStateAction,
+  Dispatch,
+} from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
@@ -24,7 +30,12 @@ import {
   Image,
 } from "@/ReduxSlices/AboutSlice";
 
-const About: React.FC = () => {
+interface myComponentProps {
+  setSocialMedia: Dispatch<SetStateAction<SocialIcon>[]>;
+  SocialMedia: SocialIcon[];
+}
+
+const About: React.FC<myComponentProps> = ({SocialMedia, setSocialMedia}) => {
   const ClickingTheImageFile = useRef<HTMLInputElement>(null);
   const {
     firstname,
@@ -38,12 +49,9 @@ const About: React.FC = () => {
     image,
   } = useSelector((state: any) => state.About);
   const dispatch = useDispatch();
-  interface Form {
-    string: string;
-  }
-  const [formList, setFormList] = useState<Form[]>([]);
+
   const addForm = () => {
-    setFormList([...formList, { string: "" }]);
+    setSocialMedia([...SocialMedia, { linkname: "", links: "" }]);
   };
 
   const handleFormChange = (
@@ -51,9 +59,9 @@ const About: React.FC = () => {
     index: number
   ) => {
     const { name, value } = event.target;
-    const updatedFormList = [...formList];
+    const updatedFormList = [...SocialMedia];
     (updatedFormList[index] as any)[name] = value;
-    setFormList(updatedFormList);
+    setSocialMedia(updatedFormList);
   };
 
   const ClickTheFile = () => {
@@ -63,9 +71,9 @@ const About: React.FC = () => {
   };
 
   const TrashHanlder = (index: number) => {
-    const data = [...formList];
+    const data = [...SocialMedia];
     data.splice(index, 1);
-    setFormList(data);
+    setSocialMedia(data);
   };
 
   const GetImage = (e: any) => {
@@ -105,7 +113,13 @@ const About: React.FC = () => {
               <ArrowDownCircleIcon className="h-7 text-green-600" />{" "}
               <span>Upload Image</span>
             </h5>
-            <span onClick={DeleteImage} className="font-semibold text-red-600 text-[14px] space-x-2 cursor-pointer flex items-center ml-9"><TrashIcon className="h-4 text-red-600"/> <span>Delete Image</span></span>
+            <span
+              onClick={DeleteImage}
+              className="font-semibold text-red-600 text-[14px] space-x-2 cursor-pointer flex items-center ml-9"
+            >
+              <TrashIcon className="h-4 text-red-600" />{" "}
+              <span>Delete Image</span>
+            </span>
           </div>
         </div>
 
@@ -183,7 +197,7 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-3">
+        <div className="mt-3 h-[280px] border-b-2 overflow-auto">
           <label htmlFor="Summery">Summery</label>
           <div className="w-full mt-1 h-[250px] rounded-md">
             <div className="p-2 flex  relative  cursor-pointer">
@@ -196,10 +210,20 @@ const About: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="">
-          {formList.map((form, index) => (
-            <div className="flex items-center space-x-3 my-2" key={index}>
-              <select className="form-control">
+        <div className="mt-5">
+          {SocialMedia.map((form, index) => (
+             <div className="flex items-center space-x-3 my-2" key={index}>
+              <select
+                value={SocialMedia[index]?.linkname}
+                onChange={(e) => {
+                  const updateitem = [...SocialMedia];
+                  updateitem[index].linkname = e.target.value;
+                  setSocialMedia(updateitem);
+
+                }}
+                className="form-control"
+              >
+                <option>-slect option-</option>
                 <option>Facebook</option>
                 <option>Linkdin</option>
                 <option>Instagram</option>
@@ -212,8 +236,12 @@ const About: React.FC = () => {
                 type="text"
                 name="field1"
                 className="form-control "
-                value={form.field1}
-                onChange={(event) => handleFormChange(event, index)}
+                value={SocialMedia[index]?.links}
+                onChange={(e) =>{
+                  const updateitem = [...SocialMedia];
+                  updateitem[index].links = e.target.value
+                  setSocialMedia(updateitem);
+                }}
               />
               <TrashIcon
                 onClick={() => TrashHanlder(index)}
@@ -224,17 +252,17 @@ const About: React.FC = () => {
 
           <Button
             type="button"
-            className="text-blue-500 flex space-x-2"
+            className="text-blue-500  flex items-center justify-center flex-col space-x-2"
             onClick={addForm}
           >
-            <PlusIcon className="h-6" />
+          <span>Add social link</span>
           </Button>
         </div>
 
         <div className="mt-[100px]">
-          <Button type="button" className="btn btn-primary block mx-auto">
+          <a href="#Education" type="button" className="btn btn-primary block mx-auto">
             Next Page
-          </Button>
+          </a>
         </div>
       </form>
     </div>

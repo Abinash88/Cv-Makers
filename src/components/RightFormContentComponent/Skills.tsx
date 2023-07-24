@@ -7,52 +7,38 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
-const About: React.FC = () => {
-  const Textbox = useRef<HTMLInputElement>(null);
-  const [values, setValue] = useState<String>("");
-  const [EducationBoxHover, setEducationBoxHover] = useState<Boolean>(false);
-  const [skillLevels, setSkillLevels] = useState<String>("");
-  const [EducationForm, setEducationForm] = useState<Form[]>([
-    {
-      string: "",
-      isHoverd: false,
-      Skill: [
-        { string: "", isChoose: false },
-        { string: "", isChoose: false },
-        { string: "", isChoose: false },
-        { string: "", isChoose: false },
-        { string: "", isChoose: false },
-      ],
-    },
-  ]);
+interface myskillcomponent {
+  SkillFormData: SkillForm[];
+  setSkillFormData: Dispatch<SetStateAction<SkillForm>>;
+}
 
-  interface Form {
-    string: string;
-    isHoverd: Boolean;
-    Skill: Array<any>;
-  }
+const About: React.FC<myskillcomponent> = ({
+  SkillFormData,
+  setSkillFormData,
+}) => {
 
   interface SkillLevels {
     string: string;
     isChoose: Boolean;
   }
 
-  const AddEducationFormFeild = () => {
-    setEducationForm((previtem) => {
+  const AddSkillFormDataFeild = () => {
+    setSkillFormData((previtem) => {
       const newData = {
-        string: "",
         isHoverd: false,
+        Skilltype: "",
+        skillLevel: "",
         Skill: [
-          { string: "", isChoose: false },
-          { string: "", isChoose: false },
-          { string: "", isChoose: false },
-          { string: "", isChoose: false },
-          { string: "", isChoose: false },
+          { string: "", isChoose: false, getlevel:false, level: "Noob" },
+          { string: "", isChoose: false, getlevel:false, level: "Begginer" },
+          { string: "", isChoose: false, getlevel:false, level: "Skillful" },
+          { string: "", isChoose: false, getlevel:false, level: "Experienced" },
+          { string: "", isChoose: false, getlevel:false, level: "Expert" },
         ],
       };
       return [...previtem, newData];
@@ -60,7 +46,7 @@ const About: React.FC = () => {
   };
 
   const HoverEducationBox = (index: number) => {
-    setEducationForm((preitem) => {
+    setSkillFormData((preitem) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
         if (index === i) {
@@ -71,59 +57,74 @@ const About: React.FC = () => {
       });
       return newData;
     });
+   
   };
 
   const DeleteEducationBox = (index: number) => {
-    if ((EducationForm.length as any) > 1) {
-      const data = [...EducationForm];
+    if ((SkillFormData.length as any) > 1) {
+      const data = [...SkillFormData];
       data.splice(index, 1);
-      setEducationForm(data);
+      setSkillFormData(data);
     } else {
       // remove the data from the education form
+      setSkillFormData((item) => {
+        const newans = item[0]?.Skill?.map((newData: object[]) => {
+          return { ...newData, Skilltype:'', isChoose: false };
+        });
+        return [{ ...item, Skilltype:'',skillLevel:'',  Skill: newans }];
+      });
     }
   };
+  
 
   const ChooseSkills = (index: number, formIndex: number) => {
-    setSkillLevels(
-      index === 0
-        ? "Noob"
-        : index === 1
-        ? "Beginner"
-        : index === 2
-        ? "Skillfull"
-        : index === 3
-        ? "Experienced"
-        : index === 4
-        ? "Pro"
-        : ""
-    );
-    setEducationForm((items: Form[]) => {
+    let selectedSkillLevelIndex = SkillFormData[formIndex]?.Skill[index]
+    const leveldata = selectedSkillLevelIndex
+      ? selectedSkillLevelIndex?.level
+      : "";
+    if (leveldata !== "") {
+      setSkillFormData((e:any[]) => {
+        const updateitems = [...SkillFormData];
+        updateitems[formIndex].skillLevel = leveldata;
+        return updateitems
+      })
+    }
+
+
+    setSkillFormData((items: Form[]) => {
       const newans = items.map((newData, ind) => {
         if (formIndex === ind) {
           const newArray = (newData.Skill = newData.Skill.map(
             (item: SkillLevels, j: number) => {
               if (index >= j) {
-                return { ...item, isChoose: true };
+                return { ...item, getlevel: j === index, isChoose: true };
               } else {
-                return { ...item, isChoose: false };
+                return { ...item, getlevel:false, isChoose: false };
               }
             }
           ));
           return { ...newData, Skill: newArray };
         }
-        return newData
+        return newData;
       });
       return newans;
     });
+
+   
+  
   };
 
+
+ 
+
+
   return (
-    <div id='Skills' className="w-full h-auto my-5 slider">
+    <div id="Skills" className="w-full h-auto my-5 slider">
       <h2 className="text-green-600 font-semibold w-full h-full ">Skills</h2>
       <p className="text-gray-500 h-full w-full text-[15px]">
         provide your Skills and its Level
       </p>
-      {EducationForm?.map((item, formIndex) => {
+      {SkillFormData?.map((item, formIndex) => {
         return (
           <form
             key={formIndex}
@@ -134,19 +135,21 @@ const About: React.FC = () => {
             <div className="flex justify-between items-center cursor-pointer hover:text-blue-500">
               <div className="flex flex-col">
                 <h4
-                  onClick={() => HoverEducationBox(formIndex)}
+                  onClick={() => {
+                    HoverEducationBox(formIndex);
+                  }}
                   className="text-[19px] hover:text-blue-500 text-gray-600"
                 >
-                  Skills
+                { SkillFormData[formIndex].Skilltype !== '' ? SkillFormData[formIndex].Skilltype  :'Skills'}
                 </h4>
-                <p className="text-[14px]">{skillLevels}</p>
+                <p>{SkillFormData[formIndex]?.skillLevel}</p>
               </div>
               <div className="flex justify-between items-center space-x-4">
                 <ChevronDownIcon
-                  onClick={() => HoverEducationBox(formIndex)}
-                  className={`h-6 ${
-                    EducationBoxHover ? "transform" : ""
-                  }  text-gray-600`}
+                  onClick={() => {
+                    HoverEducationBox(formIndex);
+                  }}
+                  className={`h-6 `}
                 />
                 <TrashIcon
                   onClick={() => DeleteEducationBox(formIndex)}
@@ -160,26 +163,42 @@ const About: React.FC = () => {
                 <input
                   type="text"
                   placeholder="Communication"
+                  value={SkillFormData[formIndex].Skilltype}
                   className="form-control"
+                  onChange={(e) => {
+                    const updateitem = [...SkillFormData];
+                    updateitem[formIndex].Skilltype = e.target.value;
+                    setSkillFormData(updateitem);
+                  }}
                   required
                 />
               </div>
               <div className="flex-1 h-full space-y-2">
                 <label htmlFor="level">
-                  Level-<span className="text-blue-600">{skillLevels} </span>
+                  Level-
+                  <span className="text-blue-600">
+                    {SkillFormData[formIndex]?.skillLevel }{" "}
+                  </span>
                 </label>
                 <div className="flex items-center cursor-pointer space-x-[1px] justify-between">
-                  { EducationForm[0].Skill.map((item, skillIndex) => {
-                    return (
-                      <span
-                        onClick={() => ChooseSkills(skillIndex, formIndex) as any}
-                        key={skillIndex}
-                        className={`w-[30px] h-[30px] ${
-                          item.isChoose  ? "bg-blue-700" : "bg-gray-200"
-                        } transition-all duration-100 rounded-sm`}
-                      ></span>
-                    );
-                  })}
+                  {SkillFormData[formIndex]?.Skill?.map(
+                    (item: any, mainindex: number) => {
+                      // Add "return" here
+                      return (
+                        <>
+                          <span
+                            onClick={() => {
+                              ChooseSkills(mainindex, formIndex) as any;
+                            }}
+                            key={mainindex}
+                            className={`w-[30px] h-[30px] ${
+                              item.isChoose ? "bg-blue-700" : "bg-gray-200"
+                            } transition-all duration-100 rounded-sm`}
+                          ></span>
+                        </>
+                      );
+                    }
+                  )}
                 </div>
               </div>
             </div>
@@ -191,15 +210,15 @@ const About: React.FC = () => {
         <button
           type="button"
           className="text-blue-500 flex space-x-2"
-          onClick={AddEducationFormFeild}
+          onClick={AddSkillFormDataFeild}
         >
           <PlusIcon className="h-6" /> Add Form
         </button>
       </div>
       <div className="mt-[50px] ">
-        <button type="button" className="btn btn-primary block mx-auto">
+        <a href='#Achivements'  type="button" className="btn btn-primary block mx-auto">
           Next Page
-        </button>
+        </a>
       </div>
     </div>
   );

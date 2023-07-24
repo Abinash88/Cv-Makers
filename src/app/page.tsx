@@ -10,7 +10,9 @@ export default function Home() {
             <p className="text-center mt-[20px] mb-5 text-[15px] md:text-[17px] font-semibold mx-[50px] md:mx-[100px] lg:mx-[200px] xl:mx-[400px] leading-6 md:leading-8  text-gray-500">Create your best Cv for the job Interview or anywhere Faster and easy Way. We provide the best user friendly dashboard for managing the content and the cv.</p>
           </div>
         <div className="CvCreatorLink">
-            <Link className="cvlinks" href={`/CreateCV`} prefetch>Create CV</Link>
+            <Link className="cvlinks" href={`/CreateCV`} prefetch >
+              Create Cv
+            </Link>
       </div>
         </div>
     </main>

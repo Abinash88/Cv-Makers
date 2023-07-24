@@ -43,7 +43,7 @@ export const AboutSlice = createSlice({
     },
     Image(state, action) {
       state.image = action.payload
-    }
+    },
   },
 });
 

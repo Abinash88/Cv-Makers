@@ -5,18 +5,38 @@ import {
 } from "@heroicons/react/24/outline";
 import React from "react";
 import { useSelector } from "react-redux";
-import ContactItemComponent from "../smallComponentsPart/ContactItemComponent";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+  FaGithub,
+  FaTwitter,
+  FaLink,
+  FaMobile,
+  FaEnvelope,
+  FaMapMarked,
+} from "react-icons/fa";
 
 interface MyEducationProps {
   EducationForm: Form[];
-  Abinash: any;
-  downloadHeight: boolean;
+  SocialMedia: SocialIcon[];
+  References: ReferForm[];
+  InputSkillType: string;
+  SkillFormData: SkillForm[];
+  LanguageForm: language[];
+  CvHeightAuto:boolean;
+    GetCvStyle:string;
 }
 
 const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
-  Abinash,
   EducationForm,
-  downloadHeight,
+  SocialMedia,
+  References,
+  LanguageForm,
+  SkillFormData,
+  CvHeightAuto,
+  GetCvStyle,
 }) => {
   const { phone, email, city, address } = useSelector(
     (state: any) => state.About
@@ -31,24 +51,43 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
     ];
   };
 
+  const CheckIcon = (name: string) => {
+    switch (name) {
+      case "Facebook":
+        return <FaFacebook className="text-[18px]" />;
+      case "Linkdin":
+        return <FaLinkedinIn className="text-[18px]" />;
+      case "Instagram":
+        return <FaInstagram className="text-[18px]" />;
+      case "Youtube":
+        return <FaYoutube className="text-[18px]" />;
+      case "Github":
+        return <FaGithub className="text-[18px]" />;
+      case "Twitter":
+        return <FaTwitter className="text-[18px]" />;
+      case "Website":
+        return <FaLink className="text-[18px]" />;
+    }
+  };
+
   return (
     <div
       id="leftblackbox"
-      className={` leftsideLayout h-full ${
-        downloadHeight ? "100%" : "w-[270px]"
-      }  overflow-clip`}
+      className={`${GetCvStyle === 'Proffesional 2 CV'? '': 'leftsideLayout'} relative  ${CvHeightAuto ? "h-auto" : "h-[160vh]"}  px-2 w-[300px] overflow-clip`}
     >
-     {image ? <div className="imagebox relative w-full h-[200px]  flex items-center justify-center">
-        <div className="w-[180px] h-[180px] flex items-center justify-center rounded-full overflow-hidden">
-          <img
-            src={image && image}
-            className="text-white h-auto w-[180px] rounded-full"
-            alt="User Photo"
-          />
+      {image ? (
+        <div className="imagebox  w-full h-[200px] mt-4 flex items-center justify-center">
+          <div className="w-[180px]  h-[180px] bg-red-100 flex items-center rounded-full justify-center overflow-hidden">
+            <img
+              src={image && image}
+              className="text-white h-full w-full "
+              alt="User Photo"
+            />
+          </div>
         </div>
-      </div> : null}
-      <div className="h-auto">
-        {phone || email || city || address ? (
+      ) : null}
+      {phone || email || city || address || SocialMedia.length > 0 ? (
+        <div className="h-auto">
           <div className="education  ml-[20px] pl-5 mt-[50px] flex flex-col items-start">
             <h3 className="text-white  font-bold border-b w-full  border-yellow-500  text-[20px] mb-3 pb-2">
               Contact
@@ -56,7 +95,7 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
 
             {phone ? (
               <div className="mb-2 flex items-center space-x-2">
-                <DeviceTabletIcon className="h-7 text-black bg-yellow-500 p-[5px] rounded-full " />
+                <FaMobile className="text-[28px]  text-black bg-yellow-500 p-[5px] rounded-full " />
                 <span className="text-white break-words w-[180px] h-auto  break-all text-[14px]">
                   {phone}{" "}
                 </span>
@@ -65,7 +104,7 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
 
             {email ? (
               <div className="mb-2 flex items-center overflow-clip space-x-2">
-                <EnvelopeIcon className="h-7 text-black bg-yellow-500 p-[5px] rounded-full " />
+                <FaEnvelope className="text-[28px] text-black bg-yellow-500 p-[5px] rounded-full " />
                 <span className="text-white break-words w-[180px] h-auto  break-all text-[14px]">
                   {email}{" "}
                 </span>
@@ -74,42 +113,143 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
 
             {address ? (
               <div className="mb-2 flex items-center space-x-2">
-                <MapPinIcon className="h-7 text-black bg-yellow-500 p-[5px] rounded-full " />
+                <FaMapMarked className="text-[28px] text-black bg-yellow-500 p-[5px] rounded-full " />
                 <span className="text-white break-words w-[180px] h-auto  break-all text-[14px]">
                   {address}{" "}
                 </span>
               </div>
             ) : null}
           </div>
-        ) : null}
-        { EducationForm[0]?.degree !== '' || EducationForm[0]?.school !== '' || EducationForm[0]?.city !== '' || EducationForm[0]?.startdate !== '' || EducationForm[0]?.summery.length > 12  ?
-          <div className="education  ml-[20px] pl-5  mt-[50px] flex flex-col items-start">
-            <h3 className="text-white  font-bold border-b w-full  border-yellow-500  text-[20px] mb-3 pb-2">
-              Education
-            </h3>
-            <div className="">
-              {EducationForm?.map((item: any, index: number) => {
-                return (
-                  <div key={index} className="text-white mb-4">
-                    <h6 className="text-[16px]">{item?.degree}</h6>
-                    <div className="">
-                      <p className="text-[14px] inline">
-                        {item?.school} {item?.school && "/"}
-                        {item?.city} {item?.city && "/"}
-                        {item?.startdate} {item?.startdate && "-"}
-                        {item?.graduatedate}
+
+          <div className="education  ml-[20px] pl-5 pr-3 mt-[0px] flex flex-col items-start">
+            {SocialMedia?.map((item: any, index: number) => {
+              return (
+                <div className="flex space-x-2 items-center ">
+                  <div
+                    className="text-black p-1 mb-[7px]  rounded-full bg-yellow-500"
+                    key={index}
+                  >
+                    {CheckIcon(item?.linkname)}
+                  </div>
+                  <a
+                    className="text-white pr-2 break-all text-[15px]"
+                    href={`https://${item.links}`}
+                  >
+                    {item?.links}
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+
+          {EducationForm[0]?.degree !== "" ||
+          EducationForm[0]?.school !== "" ||
+          EducationForm[0]?.city !== "" ||
+          EducationForm[0]?.startdate !== "" ||
+          EducationForm[0]?.summery.length > 12 ? (
+            <div className="education  ml-[20px] pl-5  mt-[50px] flex flex-col items-start">
+              <h3 className="text-white  font-bold border-b-2 w-full  border-yellow-500  text-[20px] mb-3 pb-2">
+                Education
+              </h3>
+              <div className="">
+                {EducationForm?.map((item: any, index: number) => {
+                  return (
+                    <div key={index} className="text-white mb-4">
+                      <h6 className="text-[16px]">{item?.degree}</h6>
+                      <div className="">
+                        <p className="text-[14px] inline">
+                          {item?.school} {item?.school && "/"}
+                          {item?.city} {item?.city && "/"}
+                          {item?.startdate} {item?.startdate && "-"}
+                          {item?.graduatedate}
+                        </p>
+                      </div>
+                      <p className="my-2 text-[15px]">
+                        {ChangToHtmlText(item?.summery)}
                       </p>
                     </div>
-                    <p className="my-2 text-[15px]">
-                      {ChangToHtmlText(item?.summery)}
-                    </p>
-                  </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+      {/* Language section start here  */}
+      {LanguageForm[0]?.Langtype !== "" || LanguageForm[0]?.LangLevel ? (
+        <div className=" ml-[20px] pl-5 mt-[50px] flex flex-col items-start">
+          <>
+            <h2 className="text-white  font-bold border-b-2 w-full  border-yellow-500  text-[20px] mb-3 pb-2">
+              Language
+            </h2>
+            {LanguageForm?.map((item, index) => {
+              return (
+                <>
+                  <li className="text-white " key={index}>
+                    {`${item?.Langtype} - `} {item?.LangLevel}
+                  </li>
+                </>
+              );
+            })}
+          </>
+        </div>
+      ) : null}
+
+      {/* Skills section start here  */}
+      {SkillFormData[0]?.Skilltype !== "" || SkillFormData[0]?.skillLevel ? (
+        <div className=" ml-[20px] pl-5 mt-[20px] mb-[10px] flex flex-col items-start">
+          (
+          <>
+            <h2 className="text-white  font-semibold border-b-2 w-full  border-yellow-500  text-[20px] mb-3 pb-2">
+              Skills
+            </h2>
+            <div className="">
+              {SkillFormData?.map((item, index) => {
+                return (
+                  <>
+                    <div className="text-white " key={index}>
+                      {`${item?.Skilltype} - `} {item?.skillLevel}
+                    </div>
+                  </>
                 );
               })}
             </div>
-          </div> : null
-        }
-      </div>
+          </>
+        </div>
+      ) : null}
+
+      {References[0]?.firstname !== "" ||
+      References[0]?.lastname !== "" ||
+      References[0]?.designation !== "" ||
+      References[0]?.company !== "" ||
+      References[0]?.phone !== undefined ||
+      References[0]?.email ? (
+        <div className="  ml-[20px] pl-5  mt-[30px] flex flex-col items-start">
+          <h3 className="text-white  font-semibold border-b-2 w-full  border-yellow-500  text-[20px] mb-3 pb-2">
+            References
+          </h3>
+          <div className="">
+            {References?.map((item: any, index: number) => {
+              return (
+                <div key={index} className="text-white mb-[20px]  text-base ">
+                  <h6 className="text-[16px] font-semibold">
+                    {item?.firstname}
+                    {` ${item?.lastname}`}
+                  </h6>
+                  <div className="">
+                    <p className="text-[13px]  inline">
+                      {item?.designation} {item?.designation && " / "}
+                      {item?.phone}
+                      <br></br>
+                      {item?.email}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

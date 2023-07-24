@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import Abinash from "../../../public/abinash.jpg";
-import html2pdf from "html2pdf.js";
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+// import html2pdf from "html2pdf.js";
+const html2pdf = dynamic(
+  () => import("html2pdf.js"));
 import LeftLayoutBlackbox from "@/components/mainCvDownloadLayoutBox/LeftLayoutBlackbox";
 import RightLayoutWhitebox from "../mainCvDownloadLayoutBox/RightLayoutWhitebox";
+import dynamic from "next/dynamic";
 
 interface MyEducationProps {
   EducationForm: Form[];
@@ -13,6 +15,13 @@ interface MyEducationProps {
   Achivement: AchivForm[];
   Award: AwardForm[];
   Training: TrainForm[];
+  SocialMedia: SocialIcon[];
+  References: ReferForm[];
+  InputSkillType: string;
+  LanguageForm: language[];
+  SkillFormData: SkillForm[];
+  setGetCvStle:Dispatch<SetStateAction<string>>;
+  GetCvStyle:string;
 }
 
 const CvPageDownload: React.FC<MyEducationProps> = ({
@@ -22,58 +31,52 @@ const CvPageDownload: React.FC<MyEducationProps> = ({
   Achivement,
   Award,
   Training,
+  SocialMedia,
+  References,
+  InputSkillType,
+  LanguageForm,
+  SkillFormData,
+  setGetCvStle,
+  GetCvStyle
 }) => {
   const [CvHeightAuto, setCvHeightAuto] = useState<boolean>(false);
-  const [downloadHeight, setDownloadHeight] = useState<boolean>(false);
-  const outerdiv = useRef(null);
   const page = useRef<HTMLDivElement>();
   const ChangeToPdf = () => {
     const mypage = page.current;
-    console.log(mypage);
 
     html2pdf().from(mypage).save("my_pdf.pdf");
   };
   const downloadpage = document.getElementById("downloadpage");
+  // const leftblackbox = document.getElementById("leftblackbox");
 
   useEffect(() => {
-    const CheckOverFlow = () => {
-      if (downloadpage?.scrollHeight ?? 0 > downloadpage?.clientHeight ?? 0) {
-        setCvHeightAuto(true);
-      } else {
-        setCvHeightAuto(false);
-      }
-    };
-    CheckOverFlow();
+    if (downloadpage?.scrollHeight > downloadpage?.clientHeight) {
+      console.log("working");
+      setCvHeightAuto(true);
+    } else {
+      console.log("Not working");
+      setCvHeightAuto(false);
+    }
   }, []);
-
-  useEffect(() => {
-    const leftblackbox = document.getElementById("leftblackbox");
-    const checkHeight = () => {
-      if(leftblackbox && downloadpage) {
-        if (downloadpage?.scrollHeight ?? 0 > downloadpage?.clientHeight ?? 0) {
-          setDownloadHeight(true);
-        } else {
-          setDownloadHeight(false);
-        }
-      }
-    };
-    checkHeight();
-  }, []);
+  console.log(
+    CvHeightAuto,
+    downloadpage?.scrollHeight,
+    downloadpage?.clientHeight
+  );
 
   return (
     <div className="flex-1 h-full p-2">
       <div className="flex w-[100%] mb-3 justify-between items-center">
         <div className="w-[30%]">
-          <select className="form-control ">
+          <select onChange={(e) => setGetCvStle(e.target.value)} className="form-control ">
             <option>Proffesional CV</option>
             <option>Proffesional 2 CV</option>
-            <option>Proffesional 3 CV</option>
           </select>
         </div>
         <div className="w-[50%] flex justify-end">
           <span
             onClick={ChangeToPdf}
-            className="cursor-pointer text-green-600 bg-gray-100 px-4 py-2 "
+            className="cursor-pointer hover:bg-black transition-all duration-150 rounded-md hover:text-green-500 text-green-600 bg-gray-100 px-4 py-2 "
           >
             Download Your Resume
           </span>
@@ -85,13 +88,22 @@ const CvPageDownload: React.FC<MyEducationProps> = ({
           id="downloadpage"
           ref={page as any}
           className={`${
-            CvHeightAuto ? "h-auto" : "h-[150vh]"
-          } relative  flex justify-between overflow-auto w-full pb-[70px] bg-white rounded-md`}
+            CvHeightAuto ? "h-auto" : "h-[170vh]"
+          } relative  flex justify-between  overflow-auto w-full pb-[70px]  rounded-md`}
         >
-          <LeftLayoutBlackbox Abinash={Abinash} EducationForm={EducationForm} downloadHeight={downloadHeight}/>
+          <LeftLayoutBlackbox
+            CvHeightAuto={CvHeightAuto}
+            SkillFormData={SkillFormData}
+            InputSkillType={InputSkillType}
+            LanguageForm={LanguageForm}
+            References={References}
+            EducationForm={EducationForm}
+            SocialMedia={SocialMedia}
+            GetCvStyle={GetCvStyle}
+          />
 
           <RightLayoutWhitebox
-            {...{ ExperienceForm, ProjectForm, Achivement, Award, Training }}
+            {...{ ExperienceForm, ProjectForm, Achivement, Award, Training, GetCvStyle }}
           />
         </div>
       </div>

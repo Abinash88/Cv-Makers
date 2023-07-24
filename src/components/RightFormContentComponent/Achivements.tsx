@@ -82,7 +82,7 @@ const About: React.FC<myComponentProps> = ({ Achivement, setAchivement }) => {
                 onClick={() => HoverEducationBox(index)}
                 className="text-[19px] hover:text-blue-500 text-gray-600"
               >
-                Title
+               {Achivement[index].AchivTitle !== '' ? Achivement[index].AchivTitle  : 'Achivement Title'}
               </h4>
               <div className="flex justify-between items-center space-x-4">
                 <ChevronDownIcon
@@ -145,9 +145,9 @@ const About: React.FC<myComponentProps> = ({ Achivement, setAchivement }) => {
         </button>
       </div>
       <div className="mt-[50px] ">
-        <button type="button" className="btn btn-primary block mx-auto">
+        <a href="#Traning" type="button" className="btn btn-primary block mx-auto">
           Next Page
-        </button>
+        </a>
       </div>
     </div>
   );

@@ -23,7 +23,6 @@ interface myComponentProps{
 }
 
 const About: React.FC<myComponentProps> = ({EducationForm, setEducationForm}) => {
-  const Textbox = useRef<HTMLInputElement>(null);
 
 
   const AddEducationFormFeild = () => {
@@ -42,7 +41,7 @@ const About: React.FC<myComponentProps> = ({EducationForm, setEducationForm}) =>
   };
 
   const HoverEducationBox = (index: number) => {
-    setEducationForm((preitem) => {
+    setEducationForm((preitem:any) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
         return i === index
@@ -60,7 +59,7 @@ const About: React.FC<myComponentProps> = ({EducationForm, setEducationForm}) =>
       setEducationForm(data);
     } else {
       // remove the data from the education form
-      setEducationForm((item) =>{ 
+      setEducationForm((item:any) =>{ 
         const data = [...item];
         return data.map((items) => {
           return { city:'', degree:'', graduatedate:'', isHoverd:false, school:'', startdate:'', summery:'<p><br></p>'}
@@ -217,9 +216,9 @@ const About: React.FC<myComponentProps> = ({EducationForm, setEducationForm}) =>
         </button>
       </div>
       <div className="mt-[50px] ">
-        <button type="button" className="btn btn-primary block mx-auto">
+        <a href="#Experience" type="button" className="btn btn-primary block mx-auto">
           Next Page
-        </button>
+        </a>
       </div>
     </div>
   );

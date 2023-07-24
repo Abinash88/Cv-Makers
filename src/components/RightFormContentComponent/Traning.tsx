@@ -87,7 +87,7 @@ const About: React.FC<myComponentProps> = ({ setTraining, Training }) => {
                 onClick={() => HoverEducationBox(index)}
                 className="text-[19px] hover:text-blue-500 text-gray-600"
               >
-                Certification Title
+                {Training[index].certificatetitle !== '' ? Training[index].certificatetitle : 'Certification Title'}
               </h4>
               <div className="flex justify-between items-center space-x-4">
                 <ChevronDownIcon
@@ -185,9 +185,9 @@ const About: React.FC<myComponentProps> = ({ setTraining, Training }) => {
         </button>
       </div>
       <div className="mt-[50px] ">
-        <button type="button" className="btn btn-primary block mx-auto">
+        <a href="#Awards" type="button" className="btn btn-primary block mx-auto">
           Next Page
-        </button>
+        </a>
       </div>
     </div>
   );

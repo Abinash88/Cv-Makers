@@ -7,6 +7,7 @@ import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.css'
 import {Provider} from 'react-redux'
 import store  from '@/ReduxSlices/ReduxStore'
+import {Toaster} from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Toaster/>
     <Provider store={store}>
         <div className="">
         <Header/>

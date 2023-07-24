@@ -31,14 +31,14 @@ const References: React.FC<myComponentProps> = ({
         lastname: "",
         company: "",
         designation: "",
-        phone: 0,
+        phone: undefined,
         email: "",
       },
     ]);
   };
 
   const HoverEducationBox = (index: number) => {
-    setReferences((preitem) => {
+    setReferences((preitem:any) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
         return i === index
@@ -56,7 +56,7 @@ const References: React.FC<myComponentProps> = ({
       setReferences(data);
     } else {
       // remove the data from the education form
-      setReferences((item) =>{ 
+      setReferences((item:any[]) =>{ 
         const data = [...item];
         return data.map((items) => {
           return { isHoverd: false,
@@ -64,7 +64,7 @@ const References: React.FC<myComponentProps> = ({
             lastname: "",
             company: "",
             designation: "",
-            phone: 0,
+            phone: undefined,
             email: "",}
        })
 
@@ -94,7 +94,7 @@ const References: React.FC<myComponentProps> = ({
                 onClick={() => HoverEducationBox(index)}
                 className="text-[19px] hover:text-blue-500 text-gray-600"
               >
-                References
+             {References[index].firstname !== ''|| References[index].lastname !== '' ? `${References[index].firstname  } ${References[index].lastname}`:'References'}
               </h4>
               <div className="flex justify-between items-center space-x-4">
                 <ChevronDownIcon
@@ -212,18 +212,18 @@ const References: React.FC<myComponentProps> = ({
       })}
 
       <div className="">
-        <button
+        <a
           type="button"
           className="text-blue-500 flex space-x-2"
           onClick={AddReferencesFeild}
         >
           <PlusIcon className="h-6" /> Add Form
-        </button>
+        </a>
       </div>
       <div className="mt-[50px] ">
-        <button type="button" className="btn btn-primary block mx-auto">
-          Next Page
-        </button>
+        <a id='#About' type="button" className="btn btn-primary block mx-auto">
+          To the Top
+        </a>
       </div>
     </div>
   );

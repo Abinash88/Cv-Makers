@@ -80,22 +80,23 @@ a:hover {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background-color: #e0f1ff;
-  color: #0e76ff;
+  background-color: #e4f7e6;
+  color: #15b422;
 }
 
 .leftbox .btn:hover {
-  background-color: #f0f0f0;
+  background-color: #081b0b;
+  color: #15b422;
 }
 
 
 .leftbox .btn .icons {
-  color: #0e76ff;
+  color: #15b422;
 
 }
 
 .leftbox .btn:hover .icons{
-  color: #0e76ff;
+  color: #15b422;
 }
 
 .leftbox::-webkit-scrollbar {
@@ -165,7 +166,7 @@ input {
 }
 
 .leftsideLayout {
-  background-color: #313336;
+  background-color: #252e25;
 }
 
 

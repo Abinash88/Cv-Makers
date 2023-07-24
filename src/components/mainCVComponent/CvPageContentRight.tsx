@@ -25,6 +25,12 @@ interface myComponentProps {
   setTraining: Dispatch<SetStateAction<Train>[]>;
   References:ReferForm[];
   setReferences: Dispatch<SetStateAction<ReferForm>[]>;
+  setSocialMedia: Dispatch<SetStateAction<SocialIcon>[]>;
+  SocialMedia:SocialIcon[];
+  LanguageForm:language[];
+  setLanguageForm: Dispatch<SetStateAction<language>[]>;
+  SkillFormData:SkillForm[];
+  setSkillFormData:Dispatch<SetStateAction<SkillForm>>;
 }
 
 const CvPageContentRight: React.FC<myComponentProps> = ({
@@ -41,22 +47,28 @@ const CvPageContentRight: React.FC<myComponentProps> = ({
   Training,
   setTraining,
   References,
-  setReferences
+  setReferences,
+  SocialMedia,
+  setSocialMedia,
+  LanguageForm,
+  setLanguageForm,
+  SkillFormData,
+  setSkillFormData
 }) => {
   return (
-    <div className=" formContainer h-full rounded-lg w-[500px] overflow-auto border-l border-gray-300 p-5">
-      <About />
+    <div className=" formContainer h-full rounded-lg w-[420px] overflow-auto border-l border-gray-300 py-5 px-3 ">
+      <About {...{SocialMedia, setSocialMedia}}/>
       <Education
         EducationForm={EducationForm}
         setEducationForm={setEducationForm}
       />
       <Experience {...{ setExperienceForm, ExperienceForm }} />
       <Projects {...{ProjectForm, setProjectForm}}/>
-      <Skills />
+      <Skills {...{SkillFormData, setSkillFormData}}/>
       <Achivements {...{setAchivement, Achivement}}/>
       <Traning {...{setTraining, Training}}/>
       <Awards {...{setAward, Award}}/>
-      <Language />
+      <Language {...{LanguageForm, setLanguageForm}}/>
       <Reference {...{setReferences,References}}/>
     </div>
   );

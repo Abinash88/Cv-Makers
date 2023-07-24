@@ -7,6 +7,7 @@ interface MyEducationProps {
   Achivement: AchivForm[];
   Award: AwardsForm[];
   Training: TrainForm[];
+  GetCvStyle:string;
 }
 
 const RightLayoutWhitebox: React.FC<MyEducationProps> = ({
@@ -15,6 +16,7 @@ const RightLayoutWhitebox: React.FC<MyEducationProps> = ({
   Achivement,
   Award,
   Training,
+  GetCvStyle,
 }) => {
   const { firstname, lastname, designation, summery } = useSelector(
     (state: any) => state.About
@@ -27,10 +29,10 @@ const RightLayoutWhitebox: React.FC<MyEducationProps> = ({
   }
 
   const desc = convertHtmlToPlainText(summery);
-  console.log(summery);
+
   return (
-    <div className="rightsideLayout h-full flex-1">
-      <div className="mt-10 bg-yellow-400 space-y-1 flex flex-col items-start pl-10 justify-center h-[170px] w-full">
+    <div className={` rightsideLayout h-full flex-1 `}>
+      <div className={`mt-10 ${GetCvStyle === 'Proffesional 2 CV'? '':'bg-yellow-400'}  space-y-1 flex flex-col items-start pl-10 justify-center h-[170px] w-full`}>
         <h1 className="myname">
           <b>{firstname}</b> <span className="font-light">{lastname}</span>
         </h1>
