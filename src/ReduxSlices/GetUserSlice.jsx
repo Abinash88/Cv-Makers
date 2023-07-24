@@ -16,6 +16,12 @@ export const GetUserData = createSlice({
         state.users = action.payload;
         state.userStatus = 'fullfiled'
     })
+    .addCase(FetchGetUser.pending, (state, action) => {
+        state.userStatus = 'loading'
+    })
+    .addCase(FetchGetUser.rejected, (state, action) => {
+        state.userStatus = 'failed'
+    })
   }
 
 })
