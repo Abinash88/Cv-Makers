@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/ReduxSlices/EducationContext.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/ReduxSlices/EducationContext.js", "src/ReduxSlices/GetUserSlice.js", "src/components/Header.js"],
   "exclude": ["node_modules"]
 }
