@@ -1,11 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CvPageDownload from "../../components/mainCVComponent/CvPageDownload";
 import CvPageContentLeft from "../../components/mainCVComponent/CvPageContentLeft";
 import CvPageContentRight from "../../components/mainCVComponent/CvPageContentRight";
+import { FetchGetUser } from "@/ReduxSlices/GetUserSlice";
+import { useDispatch } from "react-redux";
 
 const CreateCv: React.FC = () => {
+
+
+ const dispatch = useDispatch();
+
+ useEffect(() => {
+  dispatch(FetchGetUser());
+ },[])
+
+
+
   // Education form Data start here
   interface Form {
     isHoverd: Boolean;
@@ -213,7 +225,6 @@ const CreateCv: React.FC = () => {
   // Skill section data store end
 
   const [GetCvStyle, setGetCvStle] = useState<string>('')
-  console.log(GetCvStyle)
   return (
     <div
       style={{ height: "calc(100vh - 70px)" }}

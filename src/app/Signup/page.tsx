@@ -2,10 +2,14 @@
 
 import React, { FormEvent, useState } from "react";
 import {toast} from 'react-hot-toast'
+import {useRouter} from 'next/navigation'
+
+
 const LoginPage:React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const router = useRouter();
 
   const SubmitSignupData = async (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,6 +29,7 @@ const LoginPage:React.FC = () => {
       const data = await res.json();
       if (!data.success) return toast.error(data.message);
       toast.success(data.message);
+      router.push('/LoginPage')
     } catch (err:any) {
       console.log(err.message);
     }

@@ -73,14 +73,14 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
   return (
     <div
       id="leftblackbox"
-      className={`${GetCvStyle === 'Proffesional 2 CV'? '': 'leftsideLayout'} relative  ${CvHeightAuto ? "h-auto" : "h-[160vh]"}  px-2 w-[300px] overflow-clip`}
+      className={`${GetCvStyle === 'Proffesional 2 CV'? 'bg-slate-100': 'leftsideLayout '}  border-gray-400 relative  ${CvHeightAuto ? "h-auto" : "h-[160vh]"}  px-2 w-[300px] overflow-clip`}
     >
       {image ? (
         <div className="imagebox  w-full h-[200px] mt-4 flex items-center justify-center">
           <div className="w-[180px]  h-[180px] bg-red-100 flex items-center rounded-full justify-center overflow-hidden">
             <img
               src={image && image}
-              className="text-white h-full w-full "
+              className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'} h-full w-full `}
               alt="User Photo"
             />
           </div>
@@ -89,14 +89,14 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
       {phone || email || city || address || SocialMedia.length > 0 ? (
         <div className="h-auto">
           <div className="education  ml-[20px] pl-5 mt-[50px] flex flex-col items-start">
-            <h3 className="text-white  font-bold border-b w-full  border-yellow-500  text-[20px] mb-3 pb-2">
+            <h3 className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'}  font-bold border-b w-full  ${GetCvStyle === 'Proffesional 2 CV'? 'border-slate-600': 'border-yellow-500'}  text-[20px] mb-3 pb-2`}>
               Contact
             </h3>
 
             {phone ? (
               <div className="mb-2 flex items-center space-x-2">
                 <FaMobile className="text-[28px]  text-black bg-yellow-500 p-[5px] rounded-full " />
-                <span className="text-white break-words w-[180px] h-auto  break-all text-[14px]">
+                <span className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'} break-words w-[180px] h-auto  break-all text-[14px]`}>
                   {phone}{" "}
                 </span>
               </div>
@@ -105,7 +105,7 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
             {email ? (
               <div className="mb-2 flex items-center overflow-clip space-x-2">
                 <FaEnvelope className="text-[28px] text-black bg-yellow-500 p-[5px] rounded-full " />
-                <span className="text-white break-words w-[180px] h-auto  break-all text-[14px]">
+                <span className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'} break-words w-[180px] h-auto  break-all text-[14px]`}>
                   {email}{" "}
                 </span>
               </div>
@@ -114,7 +114,7 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
             {address ? (
               <div className="mb-2 flex items-center space-x-2">
                 <FaMapMarked className="text-[28px] text-black bg-yellow-500 p-[5px] rounded-full " />
-                <span className="text-white break-words w-[180px] h-auto  break-all text-[14px]">
+                <span className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'} break-words w-[180px] h-auto  break-all text-[14px]`}>
                   {address}{" "}
                 </span>
               </div>
@@ -132,7 +132,7 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
                     {CheckIcon(item?.linkname)}
                   </div>
                   <a
-                    className="text-white pr-2 break-all text-[15px]"
+                    className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'} pr-2 break-all text-[15px]`}
                     href={`https://${item.links}`}
                   >
                     {item?.links}
@@ -148,19 +148,19 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
           EducationForm[0]?.startdate !== "" ||
           EducationForm[0]?.summery.length > 12 ? (
             <div className="education  ml-[20px] pl-5  mt-[50px] flex flex-col items-start">
-              <h3 className="text-white  font-bold border-b-2 w-full  border-yellow-500  text-[20px] mb-3 pb-2">
+              <h3 className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'}  font-bold border-b-2 w-full  ${GetCvStyle === 'Proffesional 2 CV'? 'border-slate-600': 'border-yellow-500'}  text-[20px] mb-3 pb-2`}>
                 Education
               </h3>
               <div className="">
                 {EducationForm?.map((item: any, index: number) => {
                   return (
-                    <div key={index} className="text-white mb-4">
+                    <div key={index} className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'} mb-4`}>
                       <h6 className="text-[16px]">{item?.degree}</h6>
                       <div className="">
                         <p className="text-[14px] inline">
                           {item?.school} {item?.school && "/"}
                           {item?.city} {item?.city && "/"}
-                          {item?.startdate} {item?.startdate && "-"}
+                          {item?.startdate} {item?.startdate && " - "}
                           {item?.graduatedate}
                         </p>
                       </div>
@@ -179,13 +179,13 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
       {LanguageForm[0]?.Langtype !== "" || LanguageForm[0]?.LangLevel ? (
         <div className=" ml-[20px] pl-5 mt-[50px] flex flex-col items-start">
           <>
-            <h2 className="text-white  font-bold border-b-2 w-full  border-yellow-500  text-[20px] mb-3 pb-2">
+            <h2 className={` ${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'}  font-bold border-b-2 w-full  ${GetCvStyle === 'Proffesional 2 CV'? 'border-slate-600': 'border-yellow-500'}  text-[20px] mb-3 pb-2`}>
               Language
             </h2>
             {LanguageForm?.map((item, index) => {
               return (
                 <>
-                  <li className="text-white " key={index}>
+                  <li className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'}`} key={index}>
                     {`${item?.Langtype} - `} {item?.LangLevel}
                   </li>
                 </>
@@ -200,14 +200,14 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
         <div className=" ml-[20px] pl-5 mt-[20px] mb-[10px] flex flex-col items-start">
           (
           <>
-            <h2 className="text-white  font-semibold border-b-2 w-full  border-yellow-500  text-[20px] mb-3 pb-2">
+            <h2 className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'} font-semibold border-b-2 w-full  ${GetCvStyle === 'Proffesional 2 CV'? 'border-slate-600': 'border-yellow-500'}  text-[20px] mb-3 pb-2`}>
               Skills
             </h2>
             <div className="">
               {SkillFormData?.map((item, index) => {
                 return (
                   <>
-                    <div className="text-white " key={index}>
+                    <div className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'}`} key={index}>
                       {`${item?.Skilltype} - `} {item?.skillLevel}
                     </div>
                   </>
@@ -225,13 +225,13 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
       References[0]?.phone !== undefined ||
       References[0]?.email ? (
         <div className="  ml-[20px] pl-5  mt-[30px] flex flex-col items-start">
-          <h3 className="text-white  font-semibold border-b-2 w-full  border-yellow-500  text-[20px] mb-3 pb-2">
+          <h3 className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'}  font-semibold border-b-2 w-full  ${GetCvStyle === 'Proffesional 2 CV'? 'border-slate-600': 'border-yellow-500'}  text-[20px] mb-3 pb-2`}>
             References
           </h3>
           <div className="">
             {References?.map((item: any, index: number) => {
               return (
-                <div key={index} className="text-white mb-[20px]  text-base ">
+                <div key={index} className={`${GetCvStyle === 'Proffesional 2 CV'? 'text-black': 'text-white'} mb-[20px]  text-base `}>
                   <h6 className="text-[16px] font-semibold">
                     {item?.firstname}
                     {` ${item?.lastname}`}

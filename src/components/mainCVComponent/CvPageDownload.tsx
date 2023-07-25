@@ -2,11 +2,9 @@
 
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 // import html2pdf from "html2pdf.js";
-const html2pdf = dynamic(
-  () => import("html2pdf.js"));
+import  html2pdf   from 'html2pdf.js'
 import LeftLayoutBlackbox from "@/components/mainCvDownloadLayoutBox/LeftLayoutBlackbox";
 import RightLayoutWhitebox from "../mainCvDownloadLayoutBox/RightLayoutWhitebox";
-import dynamic from "next/dynamic";
 
 interface MyEducationProps {
   EducationForm: Form[];

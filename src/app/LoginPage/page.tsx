@@ -2,14 +2,19 @@
 
 import React ,{FormEvent, useState} from 'react'
 import { toast } from 'react-hot-toast'
+import Loading from '@/app/Loading/page'
+import {useRouter} from 'next/navigation'
 
 const LoginPage = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setloading] = useState(false);
+  const router = useRouter();
 
   const SubmitLoginData = async(e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setloading(true);
     try{
       const res = await fetch('http://localhost:3000/api/auth/Login', {
         method:'POST',
@@ -25,11 +30,14 @@ const LoginPage = () => {
       const data =await res.json()
       if(!data.success) return toast.error(data.message);
       toast.success(data.message);
+      router.push('/CreateCV')
+      setloading(false);
     }catch(err:any) {
       console.log(err.message);
+      setloading(false);
     }
   }
-
+console.log(loading)
   return (
     <div style={{height:'calc(100vh - 70px)'}} className='bg-gray-100 w-full '>
       <div className="px-[50px] flex justify-center items-center h-full w-full lg:w-[80%] m-auto">
@@ -50,7 +58,13 @@ const LoginPage = () => {
                 <label htmlFor="email" className='text-gray-600 text-[17px]'>Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className='border-2 mt-1 rounded-md px-4 bg-blue-50 py-2 text-[17px] h-[50px] h- w-full' placeholder='Password' />
               </div>
-              <button className='mx-auto px-5 py-3 block mt-4 bg-green-600 hover:bg-green-700 text-white rounded-lg ' >Submit</button> <br/>
+              <button className='mx-auto px-5 py-3 block mt-4 bg-green-600 hover:bg-green-700 text-white rounded-lg ' > 
+               { loading ?
+                <Loading/>
+                :
+                <span className=''>Submit</span>
+                }
+              </button> <br/>
               <div className="w-full text-center">
                 <p>or</p>
                 <a href="/Signup">Signup</a>

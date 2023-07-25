@@ -8,7 +8,6 @@ const Login = MiddleWareError(async(req, res) => {
     if(req.method !== 'POST') return ErrorMessage(res, 403, 'Only POST method allowd!')
     const data = req.body;
     if( !data.name || !data.email || !data.password) return ErrorMessage(res, 400, 'Please Fill up the feild!');
-    console.log(data.name, data.email, data.password)
     await mongodb()
     let user ;
     try{
@@ -24,10 +23,7 @@ const Login = MiddleWareError(async(req, res) => {
         email:data.email,
         password:changePassword,
     });
-        const token = GetToken(user._id);
-        console.log(token);
-        await CookieSetter(req, token, true);
-    res.status(200).json({success:true, message:'Successfully signed up'})
+    res.status(200).json({success:true, message:'Successfully signed up', })
 })
 
 export default Login;

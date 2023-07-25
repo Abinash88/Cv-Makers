@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import jwt from 'jsonwebtoken'
-import { serialize } from "v8";
+import { serialize } from "cookie";
+import { CvUser } from "../Model/UserModel";
 
 
 export const mongodb = async() => {
@@ -29,8 +30,15 @@ export const CookieSetter = async(res, token, set) => {
 export const JwtVerify = async(req) => {
     const cookie = req.headers.cookie
     const token = cookie?.split('=')[1]
-    if(!token) return 
-    const verify = jwt.verify(token, process.env.JWTSECRET);
-    return await CvUser.findById(verify?.userid);
+    if(!token) {
+        res.status(400).json({success:false, message:'token not found'})
+    }  
+    try{
+        const verify = jwt.verify(token, process.env.JWTSECRET);
+        const users = await CvUser.findById(verify?.userid);
+        return users;
+    }catch(err) {
+        console.log(err.message, 'jwt errors ');
+    }
 }
 
