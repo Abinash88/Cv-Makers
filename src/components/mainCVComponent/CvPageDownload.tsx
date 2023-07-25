@@ -46,6 +46,12 @@ const CvPageDownload: React.FC<MyEducationProps> = ({
   };
   const downloadpage = document.getElementById("downloadpage");
   // const leftblackbox = document.getElementById("leftblackbox");
+  const mainformdiv = document.getElementById("mainformdiv");
+
+  mainformdiv?.addEventListener('keydown', function(e) {
+    console.log(e);
+  })
+
 
   useEffect(() => {
     if (downloadpage?.scrollHeight > downloadpage?.clientHeight) {
@@ -86,7 +92,7 @@ const CvPageDownload: React.FC<MyEducationProps> = ({
           id="downloadpage"
           ref={page as any}
           className={`${
-            CvHeightAuto ? "h-auto" : "h-[170vh]"
+            CvHeightAuto ? "h-auto" : "h-[200vh]"
           } relative  flex justify-between  overflow-auto w-full pb-[70px]  rounded-md`}
         >
           <LeftLayoutBlackbox

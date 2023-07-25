@@ -73,7 +73,7 @@ const LeftLayoutBlackbox: React.FC<MyEducationProps> = ({
   return (
     <div
       id="leftblackbox"
-      className={`${GetCvStyle === 'Proffesional 2 CV'? 'bg-slate-100': 'leftsideLayout '}  border-gray-400 relative  ${CvHeightAuto ? "h-auto" : "h-[160vh]"}  px-2 w-[300px] overflow-clip`}
+      className={`${GetCvStyle === 'Proffesional 2 CV'? 'bg-slate-100': 'leftsideLayout '}  border-gray-400 relative  ${CvHeightAuto ? "h-auto" : "h-full"}  px-2 w-[300px] overflow-clip`}
     >
       {image ? (
         <div className="imagebox  w-full h-[200px] mt-4 flex items-center justify-center">

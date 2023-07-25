@@ -1,15 +1,13 @@
-import { ActionReducerMapBuilder, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Dispatch, AnyAction } from 'redux';
+
+
 
 interface userState {
     users:any[];
     userStatus:string | null;
 }
 
-interface userSlice {
-    name:string;
-    initialState:any;
-    
-}
 
 
 const initialState:userState = {
@@ -18,6 +16,27 @@ const initialState:userState = {
 }
 
 
+    
+export const GetUserData = createSlice({
+  name: 'users',
+  initialState,
+  reducers:{},
+  extraReducers:(builder) => {
+    builder.addCase(FetchGetUser.fulfilled, (state:any, action:any) => {
+        state.users = action.payload;
+        state.userStatus = 'fullfiled'
+    })
+    .addCase(FetchGetUser.pending, (state:any, action:any) => {
+        state.userStatus = 'loading'
+    })
+    .addCase(FetchGetUser.rejected, (state:any, action:any) => {
+        state.userStatus = 'failed'
+    })
+  }
+
+})
+
+export default GetUserData.reducer;
 
 export const FetchGetUser = createAsyncThunk('users/FetchGetUser', async() => {
 
@@ -37,24 +56,3 @@ export const FetchGetUser = createAsyncThunk('users/FetchGetUser', async() => {
     }
     
 })
-    
-export const GetUserData = createSlice({
-  name: 'users',
-  initialState,
-  reducers:{},
-  extraReducers:(builder) => {
-    builder.addCase(FetchGetUser.fulfilled, (state, action) => {
-        state.users = action.payload;
-        state.userStatus = 'fullfiled'
-    })
-    .addCase(FetchGetUser.pending, (state, action) => {
-        state.userStatus = 'loading'
-    })
-    .addCase(FetchGetUser.rejected, (state, action) => {
-        state.userStatus = 'failed'
-    })
-  }
-
-})
-
-export default GetUserData.reducer;
