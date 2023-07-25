@@ -4,12 +4,13 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch, AnyAction } from 'redux';
+import { Dispatch, Action } from 'redux';
 import { AsyncThunkAction } from '@reduxjs/toolkit';
 
 const Header = () => {
  const {users} = useSelector((state:any) => state.users)
- const dispatch: Dispatch<AsyncThunkAction <any, void, AsyncThunkConfig>> = useDispatch();
+//  const dispatch: Dispatch<Action<any>> = useDispatch();
+ const dispatch: Dispatch<AsyncThunkAction<any, void, AsyncThunkConfig>> = useDispatch();
  const [openLogout, setOpenLogout] = useState(true);
   const router = useRouter();
  useEffect(() => {
