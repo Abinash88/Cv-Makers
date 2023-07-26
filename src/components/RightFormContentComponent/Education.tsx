@@ -15,7 +15,7 @@ import "react-quill/dist/quill.snow.css";
 import Button from "react-bootstrap/esm/Button";
 
 interface Form {
-  isHoverd: Boolean;
+  isHoverd: boolean;
   school: string;
   degree: string;
   city: string;

@@ -4,7 +4,6 @@ import React ,{FormEvent, useState} from 'react'
 import { toast } from 'react-hot-toast'
 import Loading from '@/app/Loading/page'
 import {useRouter} from 'next/navigation'
-import Button from 'react-bootstrap/esm/Button'
 
 const LoginPage = () => {
 
@@ -13,8 +12,7 @@ const LoginPage = () => {
   const [loading, setloading] = useState(false);
   const router = useRouter();
 
-  const SubmitLoginData = async(e:FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const SubmitLoginData = async() => {
     setloading(true);
     try{
       const res = await fetch('http://localhost:3000/api/auth/Login', {
@@ -47,7 +45,7 @@ console.log(loading)
             <p className='mt-3'>Cv app for your easy cv Creating purpose</p>
         </div>
         <div className="right lg:w-[50%] w-[100%] flex items-center justify-center bg-white h-auto py-4">
-          <form onSubmit={SubmitLoginData} className='w-[80%] h-[90%] ' action="">
+          <form  className='w-[80%] h-[90%] ' action="">
               <div className="w-full h-[50px]">
                 <h2 className='text-center text-gray-900 font-semibold'>Login</h2>
               </div>
@@ -59,13 +57,13 @@ console.log(loading)
                 <label htmlFor="email" className='text-gray-600 text-[17px]'>Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className='border-2 mt-1 rounded-md px-4 bg-blue-50 py-2 text-[17px] h-[50px] h- w-full' placeholder='Password' />
               </div>
-              <Button className='mx-auto px-5 py-3 block mt-4 bg-green-600 hover:bg-green-700 text-white rounded-lg ' > 
+              <a onClick={SubmitLoginData} className='mx-auto px-5 py-3 block mt-4 bg-green-600 cursor-pointer text-center hover:bg-green-700 text-white rounded-lg ' > 
                { loading ?
                 <Loading/>
                 :
                 <span className=''>Submit</span>
                 }
-              </Button> <br/>
+              </a> <br/>
               <div className="w-full text-center">
                 <p>or</p>
                 <a href="/Signup">Signup</a>

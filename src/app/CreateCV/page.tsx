@@ -23,7 +23,7 @@ const CreateCv: React.FC = () => {
 
   // Education form Data start here
   interface Form {
-    isHoverd: Boolean;
+    isHoverd: boolean;
     school: string;
     degree: string;
     city: string;

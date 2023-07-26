@@ -13,7 +13,6 @@ const LoginPage:React.FC = () => {
   const router = useRouter();
 
   const SubmitSignupData = async (e:FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     try {
       const res = await fetch("http://localhost:3000/api/auth/Signup", {
         method: "POST",
@@ -47,7 +46,7 @@ const LoginPage:React.FC = () => {
           <p className="mt-3">Cv app for your easy cv Creating purpose</p>
         </div>
         <div className="right lg:w-[50%] w-[100%] flex items-center justify-center bg-white h-auto py-4">
-          <form onSubmit={SubmitSignupData} className="w-[80%] h-[90%] " action="">
+          <form  className="w-[80%] h-[90%] " action="">
             <div className="w-full h-[50px]">
               <h2 className="text-center text-gray-900 font-semibold">
                 Signup
@@ -89,12 +88,12 @@ const LoginPage:React.FC = () => {
                 placeholder="Password"
               />
             </div>
-            <Button
-              className="mx-auto px-5 lg:py-3 py-[10px] block mt-4 bg-green-600 hover:bg-green-700 text-white rounded-lg "
+            <a onClick={SubmitSignupData}
+              className="mx-auto px-5 text-center cursor-pointer lg:py-3 py-[10px] block mt-4 bg-green-600 hover:bg-green-700 text-white rounded-lg "
               type="submit"
             >
               Submit
-            </Butt>{" "}
+            </a>{" "}
             <br />
             <div className="w-full text-center">
               <p>or</p>
