@@ -5,12 +5,12 @@ import CvPageDownload from "../../components/mainCVComponent/CvPageDownload";
 import CvPageContentLeft from "../../components/mainCVComponent/CvPageContentLeft";
 import CvPageContentRight from "../../components/mainCVComponent/CvPageContentRight";
 import { FetchGetUser } from "@/ReduxSlices/GetUserSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/ReduxSlices/hook";
 
 const CreateCv: React.FC = () => {
 
 
- const dispatch = useDispatch();
+ const dispatch = useAppDispatch();
 
  useEffect(() => {
   dispatch(FetchGetUser());
