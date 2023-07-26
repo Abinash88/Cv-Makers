@@ -1,11 +1,51 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+
+interface ExpForm {
+  isHoverd: Boolean;
+  jobtitle: string;
+  organization: string;
+  location: string;
+  startdate: string;
+  enddate: string;
+  summery: string;
+}
+interface AchivForm {
+  isHoverd: Boolean;
+  AchivTitle: string;
+  summery: string;
+}
+
+interface TrainForm {
+  isHoverd: Boolean;
+  certificatetitle: string;
+  organization: string;
+  completedate: string;
+  summery: string;
+}
+
+interface AwardForm {
+  isHoverd: Boolean;
+  awardtitle: string;
+  organization: string;
+  location: string;
+  receveddate: string;
+  summery: string;
+}
+
+interface ProjForm {
+  isHoverd: Boolean;
+  Projecttitle: string;
+  projectlink: string;
+  summery: string;
+}
+
 interface MyEducationProps {
   ExperienceForm: ExpForm[];
   ProjectForm: ProjForm[];
   Achivement: AchivForm[];
-  Award: AwardsForm[];
+  Award: AwardForm[];
   Training: TrainForm[];
   GetCvStyle:string;
 }

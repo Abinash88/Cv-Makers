@@ -196,7 +196,7 @@ const About: React.FC<myComponentProps> = ({SocialMedia, setSocialMedia}) => {
             <input
               type="number"
               value={phone}
-              onChange={(e) => dispatch(Phone(e.target.value as number))}
+              onChange={(e) => dispatch(Phone(e.target.value as unknown))}
               className="form-control bg-white"
             />
           </div>

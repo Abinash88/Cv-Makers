@@ -10,6 +10,83 @@ import Awards from "../RightFormContentComponent/Awards";
 import Language from "../RightFormContentComponent/Language";
 import Reference from "../RightFormContentComponent/Reference";
 
+interface Form {
+  isHoverd: Boolean;
+  school: string;
+  degree: string;
+  city: string;
+  graduatedate: string;
+  startdate: string;
+  summery: string;
+}
+interface ExpForm {
+  isHoverd: Boolean;
+  jobtitle: string;
+  organization: string;
+  location: string;
+  startdate: string;
+  enddate: string;
+  summery: string;
+}
+interface AchivForm {
+  isHoverd: Boolean;
+  AchivTitle: string;
+  summery: string;
+}
+interface AwardForm {
+  isHoverd: Boolean;
+  awardtitle: string;
+  organization: string;
+  location: string;
+  receveddate: string;
+  summery: string;
+}
+interface TrainForm {
+  isHoverd: Boolean;
+  certificatetitle: string;
+  organization: string;
+  completedate: string;
+  summery: string;
+}
+interface ReferForm {
+  isHoverd: Boolean;
+  firstname: string;
+  lastname: string;
+  company: string;
+  designation: string;
+  phone: any;
+  email: string;
+}
+interface SocialIcon {
+  linkname:string;
+  links:string;
+}
+interface language{
+  isHoverd:boolean;
+  Langtype:string;
+  LangLevel:string;
+  Skill:Skill[];
+}
+
+interface Skill{
+  isChoose:boolean;
+  level:string;
+  getlevel:boolean;
+}
+interface SkillForm {
+  isHoverd: Boolean;
+  Skilltype:string;
+  Skill: Array<any>;
+  skillLevel:string;
+}
+interface ProjForm {
+  isHoverd: Boolean;
+  Projecttitle: string;
+  projectlink: string;
+  summery: string;
+}
+
+
 interface myComponentProps {
   EducationForm: Form[];
   setEducationForm: Dispatch<SetStateAction<Form>[]>;
@@ -19,10 +96,10 @@ interface myComponentProps {
   setProjectForm: Dispatch<SetStateAction<ProjForm>[]>;
   Achivement:AchivForm[];
   setAchivement: Dispatch<SetStateAction<AchivForm>[]>;
-  Award:AwardsForm[];
-  setAward: Dispatch<SetStateAction<AwardsForm>[]>;
+  Award:AwardForm[];
+  setAward: Dispatch<SetStateAction<AwardForm>[]>;
   Training:TrainForm[];
-  setTraining: Dispatch<SetStateAction<Train>[]>;
+  setTraining: Dispatch<SetStateAction<TrainForm>[]>;
   References:ReferForm[];
   setReferences: Dispatch<SetStateAction<ReferForm>[]>;
   setSocialMedia: Dispatch<SetStateAction<SocialIcon>[]>;

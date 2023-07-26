@@ -23,7 +23,7 @@ const Login = MiddleWareError(async(req, res) => {
         email:data.email,
         password:changePassword,
     });
-    res.status(200).json({success:true, message:'Successfully signed up', })
+    res.status(200).json({success:true, message:'Successfully signed up' })
 })
 
 export default Login;

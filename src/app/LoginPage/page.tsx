@@ -4,6 +4,7 @@ import React ,{FormEvent, useState} from 'react'
 import { toast } from 'react-hot-toast'
 import Loading from '@/app/Loading/page'
 import {useRouter} from 'next/navigation'
+import Button from 'react-bootstrap/esm/Button'
 
 const LoginPage = () => {
 
@@ -29,8 +30,8 @@ const LoginPage = () => {
 
       const data =await res.json()
       if(!data.success) return toast.error(data.message);
-      toast.success(data.message);
       router.push('/CreateCV')
+      toast.success(data.message);
       setloading(false);
     }catch(err:any) {
       console.log(err.message);
@@ -58,13 +59,13 @@ console.log(loading)
                 <label htmlFor="email" className='text-gray-600 text-[17px]'>Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className='border-2 mt-1 rounded-md px-4 bg-blue-50 py-2 text-[17px] h-[50px] h- w-full' placeholder='Password' />
               </div>
-              <button className='mx-auto px-5 py-3 block mt-4 bg-green-600 hover:bg-green-700 text-white rounded-lg ' > 
+              <Button className='mx-auto px-5 py-3 block mt-4 bg-green-600 hover:bg-green-700 text-white rounded-lg ' > 
                { loading ?
                 <Loading/>
                 :
                 <span className=''>Submit</span>
                 }
-              </button> <br/>
+              </Button> <br/>
               <div className="w-full text-center">
                 <p>or</p>
                 <a href="/Signup">Signup</a>

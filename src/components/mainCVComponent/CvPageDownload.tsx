@@ -5,11 +5,87 @@ import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "re
 import  html2pdf   from 'html2pdf.js'
 import LeftLayoutBlackbox from "@/components/mainCvDownloadLayoutBox/LeftLayoutBlackbox";
 import RightLayoutWhitebox from "../mainCvDownloadLayoutBox/RightLayoutWhitebox";
+interface Form {
+  isHoverd: Boolean;
+  school: string;
+  degree: string;
+  city: string;
+  graduatedate: string;
+  startdate: string;
+  summery: string;
+}
+interface ExpForm {
+  isHoverd: Boolean;
+  jobtitle: string;
+  organization: string;
+  location: string;
+  startdate: string;
+  enddate: string;
+  summery: string;
+}
+interface AchivForm {
+  isHoverd: Boolean;
+  AchivTitle: string;
+  summery: string;
+}
+interface AwardForm {
+  isHoverd: Boolean;
+  awardtitle: string;
+  organization: string;
+  location: string;
+  receveddate: string;
+  summery: string;
+}
+interface TrainForm {
+  isHoverd: Boolean;
+  certificatetitle: string;
+  organization: string;
+  completedate: string;
+  summery: string;
+}
+interface ReferForm {
+  isHoverd: Boolean;
+  firstname: string;
+  lastname: string;
+  company: string;
+  designation: string;
+  phone: any;
+  email: string;
+}
+interface SocialIcon {
+  linkname:string;
+  links:string;
+}
+interface language{
+  isHoverd:boolean;
+  Langtype:string;
+  LangLevel:string;
+  Skill:Skill[];
+}
+
+interface Skill{
+  isChoose:boolean;
+  level:string;
+  getlevel:boolean;
+}
+interface SkillForm {
+  isHoverd: Boolean;
+  Skilltype:string;
+  Skill: Array<any>;
+  skillLevel:string;
+}
+interface ProjForm {
+  isHoverd: Boolean;
+  Projecttitle: string;
+  projectlink: string;
+  summery: string;
+}
+
 
 interface MyEducationProps {
   EducationForm: Form[];
   ExperienceForm: ExpForm[];
-  ProjectForm: PorjForm[];
+  ProjectForm: ProjForm[];
   Achivement: AchivForm[];
   Award: AwardForm[];
   Training: TrainForm[];
@@ -50,25 +126,8 @@ const CvPageDownload: React.FC<MyEducationProps> = ({
   const mainformdiv = document.getElementById("mainformdiv");
   const rightwhitepage = document.getElementById('rightwhitepage');
 
-  mainformdiv?.addEventListener('keydown', function(e) {
-    if (downloadpage?.scrollHeight > downloadpage?.clientHeight || rightwhitepage?.scrollHeight > rightwhitepage?.clientHeight) {
-      console.log("working");
-      setCvHeightAuto(true);
-    } else {
-      console.log("Not working");
-      setCvHeightAuto(false);
-    }
-    console.log(
-      CvHeightAuto,
-      downloadpage?.scrollHeight,
-      downloadpage?.clientHeight,
-      rightwhitepage?.scrollHeight,
-      rightwhitepage?.clientHeight
-    );
-  })
 
 
-  console.log(Height)
 
   return (
     <div className="flex-1  h-full p-2">

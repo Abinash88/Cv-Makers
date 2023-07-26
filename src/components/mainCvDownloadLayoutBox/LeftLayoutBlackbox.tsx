@@ -1,8 +1,4 @@
-import {
-  DeviceTabletIcon,
-  EnvelopeIcon,
-  MapPinIcon,
-} from "@heroicons/react/24/outline";
+
 import React from "react";
 import { useSelector } from "react-redux";
 import {
@@ -17,6 +13,50 @@ import {
   FaEnvelope,
   FaMapMarked,
 } from "react-icons/fa";
+
+interface Form {
+  isHoverd: Boolean;
+  school: string;
+  degree: string;
+  city: string;
+  graduatedate: string;
+  startdate: string;
+  summery: string;
+}
+
+
+interface ReferForm {
+  isHoverd: Boolean;
+  firstname: string;
+  lastname: string;
+  company: string;
+  designation: string;
+  phone: any;
+  email: string;
+}
+interface SocialIcon {
+  linkname:string;
+  links:string;
+}
+interface language{
+  isHoverd:boolean;
+  Langtype:string;
+  LangLevel:string;
+  Skill:Skill[];
+}
+
+interface Skill{
+  isChoose:boolean;
+  level:string;
+  getlevel:boolean;
+}
+interface SkillForm {
+  isHoverd: Boolean;
+  Skilltype:string;
+  Skill: Array<any>;
+  skillLevel:string;
+}
+
 
 interface MyEducationProps {
   EducationForm: Form[];

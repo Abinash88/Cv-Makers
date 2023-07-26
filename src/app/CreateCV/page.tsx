@@ -5,7 +5,7 @@ import CvPageDownload from "../../components/mainCVComponent/CvPageDownload";
 import CvPageContentLeft from "../../components/mainCVComponent/CvPageContentLeft";
 import CvPageContentRight from "../../components/mainCVComponent/CvPageContentRight";
 import { FetchGetUser } from "@/ReduxSlices/GetUserSlice";
-import { useAppDispatch } from "@/ReduxSlices/hook";
+import { useAppDispatch, useAppSelector } from "@/ReduxSlices/hook";
 import { useRouter } from "next/navigation";
 
 const CreateCv: React.FC = () => {
@@ -13,6 +13,7 @@ const CreateCv: React.FC = () => {
 
  const dispatch = useAppDispatch();
  const router = useRouter()
+ const {users} = useAppSelector((state:any) => state.users)
 
  useEffect(() => {
   dispatch(FetchGetUser());
@@ -209,10 +210,6 @@ const CreateCv: React.FC = () => {
     Skill: Array<any>;
     skillLevel:string;
   }
-
-  useEffect(() => {
-    router.push('/LoginPage')
-  },[])
 
   const [SkillFormData, setSkillFormData] = useState<SkillForm[]>([
     {

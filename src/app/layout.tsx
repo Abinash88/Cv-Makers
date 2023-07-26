@@ -3,7 +3,6 @@
 import Header from "@/components/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";

@@ -44,7 +44,7 @@ const About: React.FC<myComponentProps> = ({ Achivement, setAchivement }) => {
   }
 
   const HoverEducationBox = (index: number) => {
-    setAchivement((preitem:any[]) => {
+    setAchivement((preitem) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
         return i === index
@@ -62,7 +62,7 @@ const About: React.FC<myComponentProps> = ({ Achivement, setAchivement }) => {
       setAchivement(data);
     } else {
       // remove the data from the education form
-      setAchivement((item:any[]) =>{ 
+      setAchivement((item) =>{ 
         const data = [...item];
         return data.map((items) => {
           return { isHoverd: false,

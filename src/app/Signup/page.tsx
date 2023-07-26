@@ -3,6 +3,7 @@
 import React, { FormEvent, useState } from "react";
 import {toast} from 'react-hot-toast'
 import {useRouter} from 'next/navigation'
+import Button from "react-bootstrap/esm/Button";
 
 
 const LoginPage:React.FC = () => {
@@ -88,12 +89,12 @@ const LoginPage:React.FC = () => {
                 placeholder="Password"
               />
             </div>
-            <button
+            <Button
               className="mx-auto px-5 lg:py-3 py-[10px] block mt-4 bg-green-600 hover:bg-green-700 text-white rounded-lg "
               type="submit"
             >
               Submit
-            </button>{" "}
+            </Butt>{" "}
             <br />
             <div className="w-full text-center">
               <p>or</p>
