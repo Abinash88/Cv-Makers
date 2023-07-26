@@ -13,9 +13,18 @@ import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
+
+interface TrainForm {
+  isHoverd: Boolean;
+  certificatetitle: string;
+  organization: string;
+  completedate: string;
+  summery: string;
+}
+
 interface myComponentProps {
   Training: TrainForm[];
-  setTraining: Dispatch<SetStateAction<AwardForm>[]>;
+  setTraining: Dispatch<SetStateAction<TrainForm>[]>;
 }
 
 const About: React.FC<myComponentProps> = ({ setTraining, Training }) => {

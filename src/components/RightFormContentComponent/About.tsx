@@ -30,6 +30,11 @@ import {
   Image,
 } from "@/ReduxSlices/AboutSlice";
 
+interface SocialIcon {
+  linkname:string;
+  links:string;
+}
+
 interface myComponentProps {
   setSocialMedia: Dispatch<SetStateAction<SocialIcon>[]>;
   SocialMedia: SocialIcon[];

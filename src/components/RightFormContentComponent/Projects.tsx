@@ -12,6 +12,14 @@ import React, { useRef, useState, SetStateAction, Dispatch } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import Button from "react-bootstrap/esm/Button";
+
+interface ProjForm {
+  isHoverd: Boolean;
+  Projecttitle: string;
+  projectlink: string;
+  summery: string;
+}
 
 interface myComponentProps {
   ProjectForm: ProjForm[];
@@ -150,13 +158,13 @@ const About: React.FC<myComponentProps> = ({ ProjectForm, setProjectForm }) => {
       })}
 
       <div className="">
-        <button
+        <Button
           type="button"
           className="text-blue-500 flex space-x-2"
           onClick={AddProjectFormFeild}
         >
           <PlusIcon className="h-6" /> Add Form
-        </button>
+        </Button>
       </div>
       <div className="mt-[50px] ">
         <a href="#Skills" type="button" className="btn btn-primary block mx-auto">

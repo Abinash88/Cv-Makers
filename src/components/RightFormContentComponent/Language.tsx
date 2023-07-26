@@ -11,6 +11,16 @@ import React, { useRef, useState, SetStateAction, Dispatch } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import Button from "react-bootstrap/esm/Button";
+
+
+
+interface language{
+  isHoverd:boolean;
+  Langtype:string;
+  LangLevel:string;
+  Skill:Skill[];
+}
 
 interface myComponentProps {
   LanguageForm: language[];
@@ -191,13 +201,13 @@ const About: React.FC<myComponentProps> = ({
       })}
 
       <div className="">
-        <button
+        <Button
           type="button"
           className="text-blue-500 flex space-x-2"
           onClick={AddLanguageFormFeild}
         >
           <PlusIcon className="h-6" /> Add Form
-        </button>
+        </Button>
       </div>
       <div className="mt-[50px] ">
         <a href="#Reference" type="button" className="btn btn-primary block mx-auto">

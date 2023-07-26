@@ -13,6 +13,8 @@ const Header = () => {
   const router = useRouter();
  useEffect(() => {
   dispatch(FetchGetUser());
+  if(!users._id) {
+  }
  },[])
 
  const ToggleLogout = () => {

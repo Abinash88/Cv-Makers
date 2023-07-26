@@ -7,11 +7,20 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import React, { useRef, useState, SetStateAction, Dispatch } from "react";
+import React, {SetStateAction, Dispatch } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import Button from "react-bootstrap/esm/Button";
+
+interface AwardForm {
+  isHoverd: Boolean;
+  awardtitle: string;
+  organization: string;
+  location: string;
+  receveddate: string;
+  summery: string;
+}
 
 interface myComponentProps {
   Award: AwardForm[];
@@ -19,7 +28,6 @@ interface myComponentProps {
 }
 
 const About: React.FC<myComponentProps> = ({ setAward, Award }) => {
-  const [values, setValue] = useState<String>("");
 
   const AddAwardFeild = () => {
     setAward([
@@ -189,13 +197,13 @@ const About: React.FC<myComponentProps> = ({ setAward, Award }) => {
       })}
 
       <div className="">
-        <button
+        <Button
           type="button"
           className="text-blue-500 flex space-x-2"
           onClick={AddAwardFeild}
         >
           <PlusIcon className="h-6" /> Add Form
-        </button>
+        </Button>
       </div>
       <div className="mt-[50px] ">
         <a href="#Language" type="button" className="btn btn-primary block mx-auto">

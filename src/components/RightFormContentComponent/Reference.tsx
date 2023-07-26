@@ -8,6 +8,15 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import React, { useRef, useState, SetStateAction, Dispatch } from "react";
+interface ReferForm {
+  isHoverd: Boolean;
+  firstname: string;
+  lastname: string;
+  company: string;
+  designation: string;
+  phone: any;
+  email: string;
+}
 
 interface myComponentProps {
   References: ReferForm[];

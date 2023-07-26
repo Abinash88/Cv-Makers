@@ -12,10 +12,17 @@ import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "re
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import { useDispatch, useSelector } from "react-redux";
-import { EducationData } from "@/ReduxSlices/EducationContext";
+import Button from "react-bootstrap/esm/Button";
 
-
+interface Form {
+  isHoverd: Boolean;
+  school: string;
+  degree: string;
+  city: string;
+  graduatedate: string;
+  startdate: string;
+  summery: string;
+}
 
 interface myComponentProps{
   EducationForm:Form[];
@@ -207,13 +214,13 @@ const About: React.FC<myComponentProps> = ({EducationForm, setEducationForm}) =>
       })}
 
       <div className="">
-        <button
+        <Button
           type="button"
           className="text-blue-500 flex space-x-2"
           onClick={AddEducationFormFeild}
         >
           <PlusIcon className="h-6" /> Add Form
-        </button>
+        </Button>
       </div>
       <div className="mt-[50px] ">
         <a href="#Experience" type="button" className="btn btn-primary block mx-auto">

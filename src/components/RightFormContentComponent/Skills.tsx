@@ -11,6 +11,21 @@ import React, { useRef, useState, Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import Button from "react-bootstrap/esm/Button";
+
+interface skillLevel{
+  string:string;
+  isChoose:boolean;
+  getlevel:boolean;
+  level:string;
+}
+
+interface SkillForm {
+  isHoverd: Boolean;
+  Skilltype:string;
+  Skill: skillLevel[];
+  skillLevel:string;
+}
 
 interface myskillcomponent {
   SkillFormData: SkillForm[];
@@ -28,7 +43,7 @@ const About: React.FC<myskillcomponent> = ({
   }
 
   const AddSkillFormDataFeild = () => {
-    setSkillFormData((previtem) => {
+    setSkillFormData((previtem:any[]) => {
       const newData = {
         isHoverd: false,
         Skilltype: "",
@@ -46,7 +61,7 @@ const About: React.FC<myskillcomponent> = ({
   };
 
   const HoverEducationBox = (index: number) => {
-    setSkillFormData((preitem) => {
+    setSkillFormData((preitem:any[]) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
         if (index === i) {
@@ -62,12 +77,12 @@ const About: React.FC<myskillcomponent> = ({
 
   const DeleteEducationBox = (index: number) => {
     if ((SkillFormData.length as any) > 1) {
-      const data = [...SkillFormData];
+      const data:any[] = [...SkillFormData];
       data.splice(index, 1);
       setSkillFormData(data);
     } else {
       // remove the data from the education form
-      setSkillFormData((item) => {
+      setSkillFormData((item:any[]) => {
         const newans = item[0]?.Skill?.map((newData: object[]) => {
           return { ...newData, Skilltype:'', isChoose: false };
         });
@@ -183,7 +198,6 @@ const About: React.FC<myskillcomponent> = ({
                 <div className="flex items-center cursor-pointer space-x-[1px] justify-between">
                   {SkillFormData[formIndex]?.Skill?.map(
                     (item: any, mainindex: number) => {
-                      // Add "return" here
                       return (
                         <>
                           <span
@@ -207,13 +221,13 @@ const About: React.FC<myskillcomponent> = ({
       })}
 
       <div className="">
-        <button
+        <Button
           type="button"
           className="text-blue-500 flex space-x-2"
           onClick={AddSkillFormDataFeild}
         >
           <PlusIcon className="h-6" /> Add Form
-        </button>
+        </Button>
       </div>
       <div className="mt-[50px] ">
         <a href='#Achivements'  type="button" className="btn btn-primary block mx-auto">

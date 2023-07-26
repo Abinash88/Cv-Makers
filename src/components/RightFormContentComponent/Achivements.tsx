@@ -12,6 +12,13 @@ import React, { useRef, useState, SetStateAction, Dispatch, useEffect } from "re
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import Button from "react-bootstrap/esm/Button";
+
+interface AchivForm {
+  isHoverd: Boolean;
+  AchivTitle: string;
+  summery: string;
+}
 
 interface myComponentProps {
   Achivement: AchivForm[];
@@ -30,9 +37,14 @@ const About: React.FC<myComponentProps> = ({ Achivement, setAchivement }) => {
     ]);
   };
 
+  interface maindata {
+    isHoverd:boolean;
+    AchivTitle:string;
+    summery:string;
+  }
 
   const HoverEducationBox = (index: number) => {
-    setAchivement((preitem: any[]) => {
+    setAchivement((preitem:any[]) => {
       const data = [...preitem];
       const newData = data.map((objs: any, i: number) => {
         return i === index
@@ -136,13 +148,13 @@ const About: React.FC<myComponentProps> = ({ Achivement, setAchivement }) => {
       })}
 
       <div className="">
-        <button
+        <Button
           type="button"
           className="text-blue-500 flex space-x-2"
           onClick={AddAchivementFeild}
         >
           <PlusIcon className="h-6" /> Add Form
-        </button>
+        </Button>
       </div>
       <div className="mt-[50px] ">
         <a href="#Traning" type="button" className="btn btn-primary block mx-auto">

@@ -12,18 +12,28 @@ import React, { useRef, useState, Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import Button from "react-bootstrap/esm/Button";
+
+interface ExpForm {
+  isHoverd: Boolean;
+  jobtitle: string;
+  organization: string;
+  location: string;
+  startdate: string;
+  enddate: string;
+  summery: string;
+}
+
 
 interface myComponentProps {
   ExperienceForm: ExpForm[];
-  setExperienceForm: Dispatch<SetStateAction<Form>[]>;
+  setExperienceForm: Dispatch<SetStateAction<ExpForm>[]>;
 }
 
 const About: React.FC<myComponentProps> = ({
   ExperienceForm,
   setExperienceForm,
 }) => {
-  const Textbox = useRef<HTMLInputElement>(null);
-  const [values, setValue] = useState<String>("");
   const [EducationBoxHover, setEducationBoxHover] = useState<Boolean>(false);
 
 
@@ -210,13 +220,13 @@ const About: React.FC<myComponentProps> = ({
       })}
 
       <div className="">
-        <button
+        <Button
           type="button"
           className="text-blue-500 flex space-x-2"
           onClick={AddExperienceFormFeild}
         >
           <PlusIcon className="h-6" /> Add Form
-        </button>
+        </Button>
       </div>
       <div className="mt-[50px] ">
         <a href='#Projects' type="button" className="btn btn-primary block mx-auto">

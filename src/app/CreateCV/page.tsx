@@ -6,11 +6,13 @@ import CvPageContentLeft from "../../components/mainCVComponent/CvPageContentLef
 import CvPageContentRight from "../../components/mainCVComponent/CvPageContentRight";
 import { FetchGetUser } from "@/ReduxSlices/GetUserSlice";
 import { useAppDispatch } from "@/ReduxSlices/hook";
+import { useRouter } from "next/navigation";
 
 const CreateCv: React.FC = () => {
 
 
  const dispatch = useAppDispatch();
+ const router = useRouter()
 
  useEffect(() => {
   dispatch(FetchGetUser());
@@ -160,8 +162,8 @@ const CreateCv: React.FC = () => {
   // References form Data end here
 
   interface SocialIcon {
-    linkname:string,
-    links:string,
+    linkname:string;
+    links:string;
   }
 
   // const social media links start here 
@@ -207,6 +209,10 @@ const CreateCv: React.FC = () => {
     Skill: Array<any>;
     skillLevel:string;
   }
+
+  useEffect(() => {
+    router.push('/LoginPage')
+  },[])
 
   const [SkillFormData, setSkillFormData] = useState<SkillForm[]>([
     {

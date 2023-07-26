@@ -98,7 +98,7 @@ const CvPageDownload: React.FC<MyEducationProps> = ({
           id="downloadpage"
           ref={page as any}
           className={`${
-            CvHeightAuto ? "h-auto" : `h-[${Height}vh]`
+            CvHeightAuto ? "h-auto" : `h-[170vh]`
           } relative  flex justify-between overflow-y-auto w-full pb-[70px]  rounded-md`}
         >
           <LeftLayoutBlackbox
