@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/ReduxSlices/EducationContext.js", "src/ReduxSlices/GetUserSlice.tsx", "src/components/Header.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/ReduxSlices/EducationContext.js", "src/ReduxSlices/GetUserSlice.jsx", "src/components/Header.jsx", "src/app/CreateCV/page.jsx", "src/app/Loading/page.jsx", "src/app/LoginPage/page.jsx", "src/components/mainCVComponent/CvPageContentRight.jsx", "src/components/mainCVComponent/CvPageDownload.jsx", "src/components/mainCvDownloadLayoutBox/LeftLayoutBlackbox.jsx", "src/components/mainCvDownloadLayoutBox/RightLayoutWhitebox.jsx", "src/components/RightFormContentComponent/About.jsx", "src/components/RightFormContentComponent/Achivements.jsx", "src/components/RightFormContentComponent/Awards.jsx", "src/components/RightFormContentComponent/Education.jsx", "src/components/RightFormContentComponent/Experience.jsx", "src/components/RightFormContentComponent/Language.jsx", "src/components/RightFormContentComponent/Projects.jsx", "src/components/RightFormContentComponent/Reference.jsx", "src/components/RightFormContentComponent/Skills.jsx", "src/components/RightFormContentComponent/Traning.jsx", "src/components/smallComponentsPart/ContactItemComponent.jsx", "src/components/smallComponentsPart/RightSideContentMap.jsx", "src/ReduxSlices/AboutSlice.jsx"],
   "exclude": ["node_modules"]
 }

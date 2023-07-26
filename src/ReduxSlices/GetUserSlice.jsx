@@ -1,16 +1,20 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-hot-toast";
+import {PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+
 
 
 
 const initialState = {
-  users: [],
+  users:[],
   userStatus:null,
 }
 
+
+    
 export const GetUserData = createSlice({
-  name: 'education',
+  name: 'users',
   initialState,
+  reducers:{},
   extraReducers:(builder) => {
     builder.addCase(FetchGetUser.fulfilled, (state, action) => {
         state.users = action.payload;
@@ -31,7 +35,7 @@ export default GetUserData.reducer;
 export const FetchGetUser = createAsyncThunk('users/FetchGetUser', async() => {
 
     try{
-        const res = await fetch('http://localhost:300/api/auth/GetUser',{
+        const res = await fetch('http://localhost:3000/api/auth/GetUser',{
             method:'GET',
             headers:{
                 'Content-Type':'application/json',

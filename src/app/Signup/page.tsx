@@ -1,9 +1,8 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import {toast} from 'react-hot-toast'
 import {useRouter} from 'next/navigation'
-import Button from "react-bootstrap/esm/Button";
 
 
 const LoginPage:React.FC = () => {
@@ -12,7 +11,7 @@ const LoginPage:React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
-  const SubmitSignupData = async (e:FormEvent<HTMLFormElement>) => {
+  const SubmitSignupData = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/auth/Signup", {
         method: "POST",

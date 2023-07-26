@@ -3,7 +3,7 @@ import AboutSlice from './AboutSlice'
 import EducationSlice from './EducationContext';
 import GetUserData from './GetUserSlice'
 
-export const store = configureStore({
+ const store = configureStore({
     reducer:{
         About:AboutSlice,
         education:EducationSlice,
@@ -11,5 +11,5 @@ export const store = configureStore({
     }
 })
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
+export default store;
+
