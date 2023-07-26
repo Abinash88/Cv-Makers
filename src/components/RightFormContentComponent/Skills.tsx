@@ -138,7 +138,7 @@ const About: React.FC<myskillcomponent> = ({
                   onClick={() => {
                     HoverEducationBox(formIndex);
                   }}
-                  className="text-[19px] hover:text-blue-500 text-gray-600"
+                  className="md:text-[19px] text-[17px]  hover:text-blue-500 text-gray-600"
                 >
                 { SkillFormData[formIndex].Skilltype !== '' ? SkillFormData[formIndex].Skilltype  :'Skills'}
                 </h4>

@@ -56,7 +56,7 @@ const CvPageContentRight: React.FC<myComponentProps> = ({
   setSkillFormData
 }) => {
   return (
-    <div id='mainformdiv' className=" formContainer h-full rounded-lg w-[420px] overflow-auto border-l border-gray-300 py-5 px-3 ">
+    <div id='mainformdiv' className=" formContainer  h-full md:mt-0 mt-6 rounded-lg w-[420px] overflow-auto border-l border-gray-300 py-5 px-3 ">
       <About {...{SocialMedia, setSocialMedia}}/>
       <Education
         EducationForm={EducationForm}

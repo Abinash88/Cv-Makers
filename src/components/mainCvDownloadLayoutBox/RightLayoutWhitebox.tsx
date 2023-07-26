@@ -28,10 +28,9 @@ const RightLayoutWhitebox: React.FC<MyEducationProps> = ({
     ];
   }
 
-  const desc = convertHtmlToPlainText(summery);
 
   return (
-    <div className={` rightsideLayout h-full flex-1 `}>
+    <div id="rightwhitepage" className={` rightsideLayout h-full flex-1 w-full`}>
       <div className={`mt-10 ${GetCvStyle === 'Proffesional 2 CV'? 'bg-slate-100':'bg-yellow-400'}  space-y-1 flex flex-col items-start pl-[60px] justify-center h-[170px] w-full`}>
         <h1 className="myname">
           <b>{firstname}</b> <span className="font-light">{lastname}</span>

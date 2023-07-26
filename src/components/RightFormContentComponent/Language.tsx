@@ -125,7 +125,7 @@ const About: React.FC<myComponentProps> = ({
               <div className="flex flex-col">
                 <h4
                   onClick={() => HoverEducationBox(formIndex)}
-                  className="text-[19px] hover:text-blue-500 text-gray-600"
+                  className="md:text-[19px] text-[17px]  hover:text-blue-500 text-gray-600"
                 >
                   {LanguageForm[formIndex].Langtype !== ""
                     ? LanguageForm[formIndex].Langtype

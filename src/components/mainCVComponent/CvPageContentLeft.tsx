@@ -31,73 +31,73 @@ const CvPageContent = () => {
   // }
 
   return (
-    <div className=" h-full w-[200px] overflow-auto leftbox">
-      <div className="h-[150vh]   w-full flex-col  flex items-center p-3 justify-center">
+    <div className=" h-full w-[100px]  md:w-[200px] mt-6 md:mt-0 overflow-auto leftbox">
+      <div className="md:h-[150vh] h-[125vh]   w-full flex-col  flex items-center p-3 justify-center">
         <a href="#About">
-          <button className="btn ">
+          <Button className="btn ">
             {" "}
             <UserIcon className="h-8 icons text-gray-500" /> <span>About</span>{" "}
-          </button>
+          </Button>
         </a>
         <a href="#Education">
-          <button className="btn ">
+          <Button className="btn ">
             {" "}
             <AcademicCapIcon className="h-8 icons text-gray-500" />{" "}
             <span>Education</span>
-          </button>
+          </Button>
         </a>
         <a href="#Experience">
-          <button className="btn ">
+          <Button className="btn ">
             <BriefcaseIcon className="h-8 icons text-gray-500" />{" "}
             <span>Experience</span>
-          </button>
+          </Button>
         </a>
         <a href="#Projects">
           {" "}
-          <button className="btn ">
+          <Button className="btn ">
             {" "}
             <RocketLaunchIcon className="h-8 icons text-gray-500" />{" "}
             <span>Projects</span>
-          </button>
+          </Button>
         </a>
         <a href="#Skills">
-          <button className="btn ">
+          <Button className="btn ">
             {" "}
             <LightBulbIcon className="h-8 icons text-gray-500" />{" "}
             <span>Skills</span>
-          </button>
+          </Button>
         </a>
         <a href="#Achivements">
-          <button className="btn ">
+          <Button className="btn ">
             {" "}
             <TrophyIcon className="h-8 icons text-gray-500" />{" "}
             <span>Achivements</span>
-          </button>
+          </Button>
         </a>
         <a href="#Traning">
-          <button className="btn ">
+          <Button className="btn ">
             {" "}
             <WindowIcon className="h-8 icons text-gray-500" />{" "}
             <span>Traning</span>
-          </button>
+          </Button>
         </a>
         <a href="#Awards">
-          <button className="btn ">
+          <Button className="btn ">
             {" "}
             <GiftIcon className="h-8 icons text-gray-500" /> <span>Awards</span>
-          </button>
+          </Button>
         </a>
         <a href="#Language">
-          <button className="btn ">
+          <Button className="btn ">
             <LanguageIcon className="h-8 icons text-gray-500" />{" "}
             <span>Language</span>
-          </button>
+          </Button>
         </a>
         <a href="#Reference">
-          <button className="btn ">
+          <Button className="btn ">
             <UserPlusIcon className="h-8 icons text-gray-500" />{" "}
             <span>Refrence</span>
-          </button>
+          </Button>
         </a>
       </div>
     </div>

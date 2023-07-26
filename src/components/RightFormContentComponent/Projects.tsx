@@ -78,7 +78,7 @@ const About: React.FC<myComponentProps> = ({ ProjectForm, setProjectForm }) => {
             <div className="flex justify-between items-center cursor-pointer hover:text-blue-500">
               <h4
                 onClick={() => HoverEducationBox(index)}
-                className="text-[19px] hover:text-blue-500 text-gray-600"
+                className="md:text-[19px] text-[17px]  hover:text-blue-500 text-gray-600"
               >
               {ProjectForm[index].Projecttitle? ProjectForm[index].Projecttitle : 'Projects Title'}
               </h4>

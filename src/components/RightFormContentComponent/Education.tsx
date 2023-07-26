@@ -88,7 +88,7 @@ const About: React.FC<myComponentProps> = ({EducationForm, setEducationForm}) =>
             <div className="flex justify-between items-center cursor-pointer hover:text-blue-500">
               <h4
                 onClick={() => HoverEducationBox(index)}
-                className="text-[19px] hover:text-blue-500 text-gray-600"
+                className="md:text-[19px] text-[17px] hover:text-blue-500 text-gray-600"
               >
                { EducationForm[index].school !== '' ?  EducationForm[index].school
                : 'School/Instution'

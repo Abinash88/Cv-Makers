@@ -85,7 +85,7 @@ const About: React.FC<myComponentProps> = ({ setTraining, Training }) => {
             <div className="flex justify-between items-center cursor-pointer hover:text-blue-500">
               <h4
                 onClick={() => HoverEducationBox(index)}
-                className="text-[19px] hover:text-blue-500 text-gray-600"
+                className="md:text-[19px] text-[17px]  hover:text-blue-500 text-gray-600"
               >
                 {Training[index].certificatetitle !== '' ? Training[index].certificatetitle : 'Certification Title'}
               </h4>

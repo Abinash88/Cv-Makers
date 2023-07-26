@@ -110,15 +110,15 @@ const About: React.FC<myComponentProps> = ({SocialMedia, setSocialMedia}) => {
               onClick={ClickTheFile}
               className="flex items-center text-[18px] space-x-2 cursor-pointer"
             >
-              <ArrowDownCircleIcon className="h-7 text-green-600" />{" "}
-              <span>Upload Image</span>
+              <ArrowDownCircleIcon className="md:h-7 h-5 text-green-600" />{" "}
+              <span className='md:text-[17px] text-[15px]'>Upload Image</span>
             </h5>
             <span
               onClick={DeleteImage}
               className="font-semibold text-red-600 text-[14px] space-x-2 cursor-pointer flex items-center ml-9"
             >
-              <TrashIcon className="h-4 text-red-600" />{" "}
-              <span>Delete Image</span>
+              <TrashIcon className="md:h-4  h-3  text-red-600" />{" "}
+              <span className="text-[12px] md:text-[14px]">Delete Image</span>
             </span>
           </div>
         </div>

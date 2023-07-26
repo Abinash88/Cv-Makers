@@ -80,7 +80,7 @@ const About: React.FC<myComponentProps> = ({ Achivement, setAchivement }) => {
             <div className="flex justify-between items-center cursor-pointer hover:text-blue-500">
               <h4
                 onClick={() => HoverEducationBox(index)}
-                className="text-[19px] hover:text-blue-500 text-gray-600"
+                className="md:text-[19px] text-[17px]  hover:text-blue-500 text-gray-600"
               >
                {Achivement[index].AchivTitle !== '' ? Achivement[index].AchivTitle  : 'Achivement Title'}
               </h4>

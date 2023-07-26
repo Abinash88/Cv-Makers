@@ -3,14 +3,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch, Action } from 'redux';
-import { AsyncThunkAction } from '@reduxjs/toolkit';
+import { useAppDispatch, useAppSelector } from '@/ReduxSlices/hook';
+
 
 const Header = () => {
- const {users} = useSelector((state:any) => state.users)
-//  const dispatch: Dispatch<Action<any>> = useDispatch();
- const dispatch: Dispatch<AsyncThunkAction<any, void, AsyncThunkConfig>> = useDispatch();
+ const {users} = useAppSelector((state:any) => state.users)
+ const dispatch = useAppDispatch();
  const [openLogout, setOpenLogout] = useState(true);
   const router = useRouter();
  useEffect(() => {
@@ -51,8 +49,8 @@ const Header = () => {
         <div className="">
            { users?.name ? 
            <>
-            <div onClick={ToggleLogout} className='cursor-pointer font-semibold text-[17px] text-gray-500'>{users?.name}</div>
-            <div className={` ${openLogout ? 'hidden':''} w-[120px] cursor-pointer z-20 flex items-center justify-center h-[100px] bg-gray-100 shadow-lg border right-[35px] rounded-lg top-[50px] absolute `}> 
+            <div onClick={ToggleLogout} className='cursor-pointer  font-semibold text-[17px] text-gray-500'>{users?.name}</div>
+            <div className={` ${openLogout ? 'hidden':''} w-[120px] cursor-pointer z-50 flex items-center justify-center h-[100px] bg-gray-100 shadow-lg border right-[35px] rounded-lg top-[50px] absolute  `}> 
                 <button onClick={LogoutBox} className='block text-black font-semibold w-full  bg-gray-200 py-1 cursor-pointer hover:bg-gray-300 text-center' >Logout</button>
             </div>
            </>

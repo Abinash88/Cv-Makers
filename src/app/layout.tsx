@@ -6,7 +6,7 @@ import { Inter } from "next/font/google";
 import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
-import store from "@/ReduxSlices/ReduxStore";
+import {store} from "@/ReduxSlices/ReduxStore";
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });

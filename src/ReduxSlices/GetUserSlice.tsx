@@ -1,5 +1,4 @@
-import {createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Dispatch, AnyAction } from 'redux';
+import {PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 
@@ -22,14 +21,14 @@ export const GetUserData = createSlice({
   initialState,
   reducers:{},
   extraReducers:(builder) => {
-    builder.addCase(FetchGetUser.fulfilled, (state:any, action:any) => {
+    builder.addCase(FetchGetUser.fulfilled, (state:any, action:PayloadAction<any>) => {
         state.users = action.payload;
         state.userStatus = 'fullfiled'
     })
-    .addCase(FetchGetUser.pending, (state:any, action:any) => {
+    .addCase(FetchGetUser.pending, (state:any, action:PayloadAction<any>) => {
         state.userStatus = 'loading'
     })
-    .addCase(FetchGetUser.rejected, (state:any, action:any) => {
+    .addCase(FetchGetUser.rejected, (state:any, action:PayloadAction<any>) => {
         state.userStatus = 'failed'
     })
   }
