@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import  html2pdf   from 'html2pdf.js'
+import html2pdf from 'html2pdf.js'
 import LeftLayoutBlackbox from "@/components/mainCvDownloadLayoutBox/LeftLayoutBlackbox";
 import RightLayoutWhitebox from "../mainCvDownloadLayoutBox/RightLayoutWhitebox";
 
@@ -19,13 +19,17 @@ const CvPageDownload = ({
   LanguageForm,
   SkillFormData,
   setGetCvStle,
-  GetCvStyle
+  GetCvStyle,
 }) => {
   const [CvHeightAuto, setCvHeightAuto] = useState(false);
   const page = useRef();
-  const ChangeToPdf =async () => {
-    const mypage = page.current;
-    await html2pdf().from(mypage).save("my_pdf.pdf");
+  const ChangeToPdf =  () => {
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const mypage = page.current;
+        html2pdf().from(mypage).save("my_pdf.pdf");
+      }
+    },[])
   };
 
 
@@ -53,10 +57,9 @@ const CvPageDownload = ({
       <div className="overflow-auto mainCvLayout  hidden  lg:flex h-full">
         <div
           id="downloadpage"
-          ref={page }
-          className={`${
-            CvHeightAuto ? "h-auto" : `h-[170vh]`
-          } relative  flex justify-between overflow-y-auto w-full pb-[70px]  rounded-md`}
+          ref={page}
+          className={`${CvHeightAuto ? "h-auto" : `h-[170vh]`
+            } relative  flex justify-between overflow-y-auto w-full pb-[70px]  rounded-md`}
         >
           <LeftLayoutBlackbox
             CvHeightAuto={CvHeightAuto}

@@ -6,14 +6,12 @@ import CvPageContentLeft from "../../components/mainCVComponent/CvPageContentLef
 import CvPageContentRight from "../../components/mainCVComponent/CvPageContentRight";
 import { FetchGetUser } from "@/ReduxSlices/GetUserSlice";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const CreateCv = () => {
 
 
  const dispatch = useDispatch();
- const router = useRouter()
- const {users} = useSelector((state) => state.users)
 
  useEffect(() => {
   dispatch(FetchGetUser());

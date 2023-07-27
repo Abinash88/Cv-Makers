@@ -18,17 +18,7 @@ import Button from "react-bootstrap/Button";
 import { useLocation } from "react-router-dom";
 
 const CvPageContent = () => {
-  // if (typeof window !== "undefined") {
-  //   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  //     anchor.addEventListener("click", function (e) {
-  //       e.preventDefault();
-  //       const target = document.querySelector(this.getAttribute("href"));
-  //       target?.scrollIntoView({
-  //         behavior: "smooth",
-  //       });
-  //     });
-  //   });
-  // }
+
 
   return (
     <div className=" h-full w-[100px]  md:w-[200px] mt-6 md:mt-0 overflow-auto leftbox">
