@@ -24,24 +24,26 @@ const CvPageDownload = ({
 }) => {
   const [CvHeightAuto, setCvHeightAuto] = useState(false);
   const page = useRef();
-  const ChangeToPdf = () => {
-    // if (typeof window !== 'undefined') {
-    //   console.log(typeof window)
-    //   const mypage = page.current;
-    //   html2pdf().from(mypage).save("my_pdf.pdf");
-    // }
-   try{
-    html2canvas(page.current).then((canvas) =>{
-      const parser = canvas.toDataURL('img/png');
-      const doc = new jsPDF('p', 'mm', 'a4');
-      const componentWidth = doc.internal.pageSize.getWidth();
-      const componentHeight = doc.internal.pageSize.getHeight();
-      doc.addImage(parser, 'PNG', 0, 0, componentWidth, componentHeight);
-    doc.save('my-pdf-file.pdf');
-  })
-   }catch(err) {
-    console.log(err.message)
-   }
+  const ChangeToPdf =async () => {
+    try {
+      const html2pdf = (await import('html2pdf.js')).default;
+      if (typeof window !== 'undefined') {
+        console.log( window)
+        const mypage = page.current;
+        html2pdf().from(mypage).save("my_pdf.pdf");
+      }
+      // const pdf = new jsPDF();
+      // html2canvas(page).then((canvas) =>{
+      //   const parser = canvas.toDataURL('img/png');
+      //   const doc = new jsPDF('p', 'mm', 'a4');
+      //   const componentWidth = document.internal.pageSize.getWidth();
+      //   const componentHeight = document.internal.pageSize.getHeight();
+      //   doc.addImage(parser, 'png',)
+      // pdf.save('mypdf-file')
+      // })
+    } catch (err) {
+      console.log(err.message)
+    }
   };
 
 
