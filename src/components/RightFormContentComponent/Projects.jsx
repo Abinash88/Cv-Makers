@@ -7,7 +7,6 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import React, { useRef, useState, SetStateAction, Dispatch } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -16,9 +15,6 @@ import Button from "react-bootstrap/esm/Button";
 
 
 const About = ({ ProjectForm, setProjectForm }) => {
-  const Textbox = useRef(null);
-  const [values, setValue] = useState("");
-  const [EducationBoxHover, setEducationBoxHover] = useState(false);
 
   const AddProjectFormFeild = () => {
     setProjectForm([
@@ -82,9 +78,7 @@ const About = ({ ProjectForm, setProjectForm }) => {
               <div className="flex justify-between items-center space-x-4">
                 <ChevronDownIcon
                   onClick={() => HoverEducationBox(index)}
-                  className={`h-6 ${
-                    EducationBoxHover ? "transform" : ""
-                  }  text-gray-600`}
+                  className={`h-6  text-gray-600`}
                 />
                 <TrashIcon
                   onClick={() => DeleteEducationBox(index)}

@@ -49,15 +49,15 @@ const About = ({SocialMedia, setSocialMedia}) => {
     setSocialMedia([...SocialMedia, { linkname: "", links: "" }]);
   };
 
-  const handleFormChange = (
-    event,
-    index
-  ) => {
-    const { name, value } = event.target;
-    const updatedFormList = [...SocialMedia];
-    (updatedFormList[index] )[name] = value;
-    setSocialMedia(updatedFormList);
-  };
+  // const handleFormChange = (
+  //   event,
+  //   index
+  // ) => {
+  //   const { name, value } = event.target;
+  //   const updatedFormList = [...SocialMedia];
+  //   (updatedFormList[index] )[name] = value;
+  //   setSocialMedia(updatedFormList);
+  // };
 
   const ClickTheFile = () => {
     if (ClickingTheImageFile.current) {

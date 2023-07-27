@@ -30,10 +30,6 @@ const CvPageDownload = ({
 
     html2pdf().from(mypage).save("my_pdf.pdf");
   };
-  const downloadpage = document.getElementById("downloadpage");
-  // const leftblackbox = document.getElementById("leftblackbox");
-  const mainformdiv = document.getElementById("mainformdiv");
-  const rightwhitepage = document.getElementById('rightwhitepage');
 
 
 
@@ -47,10 +43,6 @@ const CvPageDownload = ({
             <option>Proffesional 2 CV</option>
           </select>
         </div>
-        {/* <div className="w-[50%] ml-3 flex items-center justify-around">
-          <div onClick={() => setHeight(Height += 10)} className="text-gray-600 text-[16px] px-2 py-1 bg-gray-100 hover:bg-gray-100 cursor-pointer font-semibold"> Increase Height (+10)</div>
-          <div  onClick={() => setHeight(Height -= 10)} className="text-gray-600 text-[16px] px-2 py-1 bg-gray-100 hover:bg-gray-200 cursor-pointer font-semibold"> Decrease Height (-10)</div>
-        </div> */}
         <div className="w-[50%] flex justify-end">
           <span
             onClick={ChangeToPdf}
