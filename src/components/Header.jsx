@@ -24,7 +24,7 @@ const Header = () => {
 
  const LogoutBox = async() => {
   try {
-    const res = await fetch("http://localhost:3000/api/auth/Logout", {
+    const res = await fetch("/api/auth/Logout", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
