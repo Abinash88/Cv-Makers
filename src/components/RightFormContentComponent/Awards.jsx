@@ -191,11 +191,7 @@ const About = ({ setAward, Award }) => {
           <PlusIcon className="h-6" /> Add Form
         </Button>
       </div>
-      <div className="mt-[50px] ">
-        <a href="#Language" type="button" className="btn btn-primary block mx-auto">
-          Next Page
-        </a>
-      </div>
+      
     </div>
   );
 };

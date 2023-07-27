@@ -80,8 +80,7 @@ const About = ({SocialMedia, setSocialMedia}) => {
   };
 
   const DeleteImage = () => {
-    const imgs = "";
-    dispatch(Image(imgs));
+    dispatch(Image(''));
   };
   return (
     <div id="About" className="w-full h-auto slider ">
@@ -254,11 +253,8 @@ const About = ({SocialMedia, setSocialMedia}) => {
           </Button>
         </div>
 
-        <div className="mt-[100px]">
-          <a href="#Education" type="button" className="btn btn-primary block mx-auto">
-            Next Page
-          </a>
-        </div>
+       
+       
       </form>
     </div>
   );

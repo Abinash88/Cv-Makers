@@ -25,10 +25,10 @@ const RightLayoutWhitebox= ({
   return (
     <div id="rightwhitepage" className={` rightsideLayout h-full flex-1 w-full`}>
       <div className={`mt-10 ${GetCvStyle === 'Proffesional 2 CV'? 'bg-slate-100':'bg-yellow-400'}  space-y-1 flex flex-col items-start pl-[60px] justify-center h-[170px] w-full`}>
-        <h1 className="myname">
+        <h2 className="myname">
           <b>{firstname}</b> <span className="font-light">{lastname}</span>
-        </h1>
-        <h5 className="tracking-wider text-gray-600">{designation}</h5>
+        </h2>
+        <h5 className="tracking-wider text-[22px] text-gray-600">{designation}</h5>
       </div>
       {<div className="mt-5 ml-[60px]">
         <div className={`h-auto  aboutyou`}>

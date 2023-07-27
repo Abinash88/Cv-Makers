@@ -180,11 +180,7 @@ const Traning = ({ setTraining, Training }) => {
           <PlusIcon className="h-6" /> Add Form
         </button>
       </div>
-      <div className="mt-[50px] ">
-        <a href="#Awards" type="button" className="btn btn-primary block mx-auto">
-          Next Page
-        </a>
-      </div>
+      
     </div>
   );
 };
