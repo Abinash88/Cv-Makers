@@ -35,7 +35,7 @@ export default GetUserData.reducer;
 export const FetchGetUser = createAsyncThunk('users/FetchGetUser', async() => {
 
     try{
-        const res = await fetch('http://localhost:3000/api/auth/GetUser',{
+        const res = await fetch('/api/auth/GetUser',{
             method:'GET',
             headers:{
                 'Content-Type':'application/json',

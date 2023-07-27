@@ -13,7 +13,7 @@ const LoginPage= () => {
 
   const SubmitSignupData = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/auth/Signup", {
+      const res = await fetch("/api/auth/Signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
