@@ -5,10 +5,10 @@ import {toast} from 'react-hot-toast'
 import {useRouter} from 'next/navigation'
 
 
-const LoginPage:React.FC = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+const LoginPage= () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const SubmitSignupData = async () => {
@@ -29,7 +29,7 @@ const LoginPage:React.FC = () => {
       if (!data.success) return toast.error(data.message);
       toast.success(data.message);
       router.push('/LoginPage')
-    } catch (err:any) {
+    } catch (err) {
       console.log(err.message);
     }
   };

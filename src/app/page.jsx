@@ -6,9 +6,9 @@ import { useState } from "react";
 import Loading from "./Loading/page";
 
 export default function Home() {
-  const [myloading, setMyloading] = useState<boolean>(false);
+  const [myloading, setMyloading] = useState(false);
 
-  const { users } = useSelector((state: any) => state.users);
+  const { users } = useSelector((state) => state.users);
   return (
     <main className="w-screen ">
       <div
