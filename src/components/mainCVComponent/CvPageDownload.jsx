@@ -1,11 +1,11 @@
 "use client";
 
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import html2pdf from 'html2pdf.js'
 import LeftLayoutBlackbox from "@/components/mainCvDownloadLayoutBox/LeftLayoutBlackbox";
 import RightLayoutWhitebox from "../mainCvDownloadLayoutBox/RightLayoutWhitebox";
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+import dynamic from "next/dynamic";
+// const html2pdf = dynamic(() => import('html2pdf.js')) 
 
 const CvPageDownload = ({
   EducationForm,
@@ -24,23 +24,13 @@ const CvPageDownload = ({
 }) => {
   const [CvHeightAuto, setCvHeightAuto] = useState(false);
   const page = useRef();
-  const ChangeToPdf =async () => {
+  console.log(typeof window)
+  const ChangeToPdf = async () => {
+    
     try {
-      const html2pdf = (await import('html2pdf.js')).default;
       if (typeof window !== 'undefined') {
-        console.log( window)
-        const mypage = page.current;
-        html2pdf().from(mypage).save("my_pdf.pdf");
+        html2pdf().from(page.current).save();
       }
-      // const pdf = new jsPDF();
-      // html2canvas(page).then((canvas) =>{
-      //   const parser = canvas.toDataURL('img/png');
-      //   const doc = new jsPDF('p', 'mm', 'a4');
-      //   const componentWidth = document.internal.pageSize.getWidth();
-      //   const componentHeight = document.internal.pageSize.getHeight();
-      //   doc.addImage(parser, 'png',)
-      // pdf.save('mypdf-file')
-      // })
     } catch (err) {
       console.log(err.message)
     }
