@@ -1,11 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import html2pdf from 'html2pdf.js'
 import LeftLayoutBlackbox from "@/components/mainCvDownloadLayoutBox/LeftLayoutBlackbox";
 import RightLayoutWhitebox from "../mainCvDownloadLayoutBox/RightLayoutWhitebox";
-import dynamic from "next/dynamic";
-// const html2pdf = dynamic(() => import('html2pdf.js')) 
 
 const CvPageDownload = ({
   EducationForm,
@@ -24,11 +21,15 @@ const CvPageDownload = ({
 }) => {
   const [CvHeightAuto, setCvHeightAuto] = useState(false);
   const page = useRef();
-  console.log(typeof window)
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const ChangeToPdf = async () => {
-    
     try {
-      if (typeof window !== 'undefined') {
+      if (isClient) {
         const htmltopdf = (await import('html2pdf.js')).default;
         htmltopdf().from(page.current).save();
       }

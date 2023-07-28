@@ -11,7 +11,6 @@ const Login = MiddleWareError(async(req, res) => {
         const user =await JwtVerify(req);
 
     if(!user) return res.status(409).json({success:false, message:'Please Login First!'})
-    console.log(user, 'myusers');
     res.status(200).json({success:true, message:'Get User Successfully', user})
 })
 
