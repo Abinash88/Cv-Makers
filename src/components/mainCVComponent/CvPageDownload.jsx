@@ -29,7 +29,8 @@ const CvPageDownload = ({
     
     try {
       if (typeof window !== 'undefined') {
-        html2pdf().from(page.current).save();
+        const htmltopdf = (await import('html2pdf.js')).default;
+        htmltopdf().from(page.current).save();
       }
     } catch (err) {
       console.log(err.message)
