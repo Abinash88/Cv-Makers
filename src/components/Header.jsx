@@ -47,7 +47,7 @@ const Header = () => {
             <Link className='logo text-[20px] md:text-[27px]' href={'/'}> <span>CV</span>-Maker</Link>
         </div>
         <div className='mr-0 md:mr-[96px]'>
-          <h5 className='text-red-600  border-2 text-[16px] md:text-[22px] rounded-full p-2 ongointtag border-red-500'> On Going Porject </h5>
+          <h5 className='text-red-600  border-2 text-[16px] md:text-[22px] rounded-full p-2 sm:flex hidden ongointtag border-red-500'> On Going Porject </h5>
         </div>
         <div className="">
            { users?.name ? 

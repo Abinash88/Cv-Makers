@@ -44,18 +44,18 @@ const CvPageDownload = ({
   return (
     <div className="flex-1  h-full p-2">
       <div className="flex w-[100%] md:static absolute left-0  top-[25px] md:bg-transparent  z-20  mb-3 justify-between items-center">
-        <div className="w-[30%]">
-          <select onChange={(e) => setGetCvStle(e.target.value)} className="form-control ">
+        <div className="w-[50%] md:w-[30%]">
+          <select  onChange={(e) => setGetCvStle(e.target.value)} className="form-control sm:text-[16px] text-[14px]">
             <option>Proffesional CV</option>
             <option>Proffesional 2 CV</option>
           </select>
         </div>
-        <div className="w-[50%] flex justify-end">
+        <div className=" w-[50%] md:w-[50%] text-center flex justify-end">
           <span
             onClick={ChangeToPdf}
-            className="cursor-pointer hover:bg-black transition-all duration-150 rounded-md hover:text-green-500 text-green-600 bg-gray-200 px-4 py-2 "
+            className="cursor-pointer hover:bg-black transition-all duration-150 rounded-md hover:text-green-500 text-green-600 bg-gray-200 px-4 py-2 text-[14px] sm:text-[17px]"
           >
-            Download Your Resume
+            Download Resume
           </span>
         </div>
       </div>

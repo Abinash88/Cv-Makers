@@ -21,7 +21,7 @@ const CvPageContent = () => {
 
 
   return (
-    <div className=" h-full w-[100px]  md:w-[200px] mt-6 md:mt-0 overflow-auto leftbox">
+    <div className=" h-full hidden sm:w-[100px]  md:w-[200px] mt-6 md:mt-0 overflow-auto leftbox">
       <div className="md:h-[150vh] h-[125vh]   w-full flex-col  flex items-center p-3 justify-center">
         <a href="#About">
           <Button className="btn ">
